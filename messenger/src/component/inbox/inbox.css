@@ -1,0 +1,4 @@
+.inbox-main {
+    background-color: var(--main-color);
+    flex-grow: 4;
+}
