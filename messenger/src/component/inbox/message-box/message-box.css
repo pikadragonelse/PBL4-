@@ -1,0 +1,36 @@
+.message-box {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+}
+
+.message-box-main {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    background-color: var(--sub-color);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-mch);
+}
+
+.message-box-input {
+    flex: 1;
+    background-color: transparent;
+    
+}
+
+.message-box-method {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.message-box-icon {
+    transition: color 0.1s ease-out;
+    cursor: pointer;
+}
+
+.message-box-icon:hover {
+    color: var(--private-color);
+}
+
