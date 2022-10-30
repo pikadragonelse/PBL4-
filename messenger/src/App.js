@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './App.css';
 import { DetailInfoInbox } from './component/detail-info-inbox';
@@ -12,7 +12,7 @@ const App = () => {
         <Wrapper type="wrapper-app">
             <Sidebar />
             <FriendBox />
-            <Inbox />
+            <Inbox idUser="" />
             <DetailInfoInbox />
         </Wrapper>
     );
