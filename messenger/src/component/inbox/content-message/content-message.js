@@ -7,12 +7,10 @@ const ContentMessage = ({ idUser }) => {
     const [listMessage, setListMessage] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3001/contain', { content: 'content' })
+        fetch('http://localhost:3001/content')
             .then((res) => res.json())
             .then((data) => setListMessage(data));
     }, []);
-
-    console.log(listMessage);
 
     return (
         <div className="content-message">

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 
 import './App.css';
-
 import { DetailInfoInbox } from './component/detail-info-inbox';
 import { FriendBox } from './component/friend-box';
 import { Inbox } from './component/inbox';
