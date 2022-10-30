@@ -1,0 +1,44 @@
+.message {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+    margin: var(--spacing-sm);
+    font-size: var(--font-sm);
+}
+
+.user-message {
+    flex-direction: row-reverse;
+}
+
+.user-message  .message-content {
+    background-color: var(--private-color);
+    color: var(--sub-contrast-color);
+}
+
+
+.message-img-wrapper {
+    --size-img: 40px;
+    width: var(--size-img);
+    height: var(--size-img);
+}
+
+
+.message-avt {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: var( --border-radius-mch);
+}
+
+.message-content {
+    max-width: 300px;
+    background-color: var(--sub-light-color);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-md);
+}
+
+.message-content-text {
+    word-wrap: break-word;
+    line-height: 1;
+
+}

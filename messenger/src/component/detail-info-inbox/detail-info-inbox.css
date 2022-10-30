@@ -1,0 +1,4 @@
+.detail-info-inbox {
+    background-color: var(--sub-color);
+    flex-grow: 1;
+}
