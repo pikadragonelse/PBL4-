@@ -1,23 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import './content-message.css';
 import { Message } from './message';
 
-const ContentMessage = ({ idUser }) => {
+const ContentMessage = ({ idUser, messageSended }) => {
     const [listMessage, setListMessage] = useState({});
-
-    // useEffect(() => {
-    //     fetch('http://localhost:3001/content')
-    //         .then((res) => res.json())
-    //         .then((data) => setListMessage(data));
-    // }, []);
-    useEffect(() => {
+    let checkSendMessage = useRef(false);
+    const getAllMessages = () => {
         fetch('http://localhost:8080/api/message/get-message/?idGroup=1&page=0')
             .then((res) => res.json())
             .then((data) => setListMessage(data));
-    }, []);
+    };
 
-    console.log(listMessage.content);
+    const sendMessage = (messageSended) => {
+        const option = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(messageSended),
+        };
+
+        fetch('http://localhost:8080/api/message/get-message/?idGroup=1&page=0', option);
+    };
+    useEffect(() => {
+        getAllMessages();
+    }, [listMessage]);
+
+    useEffect(() => {
+        sendMessage(messageSended);
+    }, [checkSendMessage.current]);
 
     return (
         <div className="content-message">
