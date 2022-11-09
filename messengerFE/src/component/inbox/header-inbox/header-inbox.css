@@ -1,0 +1,62 @@
+.header-inbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 5px 5px -5px var(--contrast-color);
+    padding: var(--spacing-sm);
+    z-index: 1;
+}
+
+.header-inbox-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.header-inbox-wrapper-img {
+    --size-img: 50px;
+    width: var(--size-img);
+    height: var(--size-img);
+}
+
+.header-inbox-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+    border-radius: var(--border-radius-mch);  
+}
+
+.header-inbox-state-friend {
+    font-size: var(--font-vr-sm);
+}
+
+
+.header-inbox-method {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--private-color);
+}
+
+.header-inbox-method-icon {
+    --size-icon: 20px;
+    width: var(--size-icon);
+    height: var(--size-icon);
+    padding: var(--spacing-sm);
+    line-height: 1;
+    cursor: pointer;
+}
+
+.header-inbox-method-icon:hover {
+    background-color: var(--sub-color);
+    border-radius: var(--border-radius-mch);
+}
+
+.header-inbox-method-special {
+    --size-icon: 30px;
+    width: var(--size-icon);
+    height: var(--size-icon);
+}
+
+
+

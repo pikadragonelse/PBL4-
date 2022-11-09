@@ -1,0 +1,5 @@
+.sidebar-main {
+    flex-grow: 0;
+    background-color: var(--main-color);
+    height: 100%;
+}

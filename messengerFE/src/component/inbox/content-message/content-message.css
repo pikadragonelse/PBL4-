@@ -1,0 +1,25 @@
+.content-message {
+    position: relative;
+    flex: 1;
+    padding: var(--spacing-sm) 0;
+    overflow-y: auto;
+}
+
+.content-message::-webkit-scrollbar-track
+{
+	border-radius: var(--border-radius-mch);
+	background-color: var(--main-color);
+}
+
+.content-message::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: var(--main-color);
+}
+
+.content-message::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: var(--contrast-color);
+    cursor: pointer;
+}

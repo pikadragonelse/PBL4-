@@ -1,0 +1,35 @@
+{
+
+    "content": [
+      {
+          "idMessage": 1,
+          "idSender": 2,
+          "message": "Test nè",
+          "text": true
+      },
+      {
+        "idMessage": 1,
+        "idSender": 1,
+        "message": "Test nè",
+        "text": true
+    },
+    {
+        "idMessage": 1,
+        "idSender": 2,
+        "message": "Test nè",
+        "text": true
+    },
+    {
+        "idMessage": 1,
+        "idSender": 1,
+        "message": "Test nè",
+        "text": true
+    },
+    {
+        "idMessage": 1,
+        "idSender": 2,
+        "message": "Test nè",
+        "text": true
+    }
+  ]
+}
