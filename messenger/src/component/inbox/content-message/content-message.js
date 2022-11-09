@@ -4,15 +4,20 @@ import './content-message.css';
 import { Message } from './message';
 
 const ContentMessage = ({ idUser }) => {
-    const [listMessage, setListMessage] = useState([]);
+    const [listMessage, setListMessage] = useState({});
 
+    // useEffect(() => {
+    //     fetch('http://localhost:3001/content')
+    //         .then((res) => res.json())
+    //         .then((data) => setListMessage(data));
+    // }, []);
     useEffect(() => {
-        fetch('http://localhost:3001/contain', { content: 'content' })
+        fetch('http://localhost:8080/api/message/get-message/?idGroup=1&page=0')
             .then((res) => res.json())
             .then((data) => setListMessage(data));
     }, []);
 
-    console.log(listMessage);
+    console.log(listMessage.content);
 
     return (
         <div className="content-message">
