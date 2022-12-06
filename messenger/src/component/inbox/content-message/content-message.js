@@ -1,49 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import './content-message.css';
 import { Message } from './message';
 
-const ContentMessage = ({ idUser, messageSended }) => {
-    const [listMessage, setListMessage] = useState({});
-    let checkSendMessage = useRef(false);
-    const getAllMessages = () => {
-        fetch('http://localhost:8080/api/message/get-message/?idGroup=1&page=0')
-            .then((res) => res.json())
-            .then((data) => setListMessage(data));
-    };
+export const ContentMessage = forwardRef(({ idUser, listMessage }, contentMessageRefParents) => {
+    const contentMessageRef = useRef(null);
 
-    const sendMessage = (messageSended) => {
-        const option = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
+    useImperativeHandle(contentMessageRefParents, () => {
+        return {
+            setScroll() {
+                contentMessageRef.current.scrollTop =
+                    contentMessageRef.current.scrollHeight - contentMessageRef.current.clientHeight;
             },
-            body: JSON.stringify(messageSended),
         };
-
-        fetch('http://localhost:8080/api/message/get-message/?idGroup=1&page=0', option);
-    };
-    useEffect(() => {
-        getAllMessages();
-    }, [listMessage]);
-
-    useEffect(() => {
-        sendMessage(messageSended);
-    }, [checkSendMessage.current]);
+    });
 
     return (
-        <div className="content-message">
-            {listMessage.map((item, index) => (
+        <div ref={contentMessageRef} className="content-message">
+            {listMessage.map((item) => (
                 <Message
-                    key={index}
-                    type={item.idSender === 1 ? 'user-message' : ''}
-                    image="https://www.mordeo.org/files/uploads/2019/04/Spitz-Pet-Dog-4K-Ultra-HD-Mobile-Wallpaper-950x1689.jpg"
+                    key={item.idMessage}
+                    type={item.idSender === idUser ? 'user-message' : ''}
+                    image={process.env.PUBLIC_URL + '/avatar.jpg'}
                 >
                     {item.message}
                 </Message>
             ))}
         </div>
     );
-};
-
-export { ContentMessage };
+});

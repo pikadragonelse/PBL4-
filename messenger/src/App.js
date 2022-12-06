@@ -1,19 +1,15 @@
-import { DetailInfoInbox } from './component/detail-info-inbox';
-import { FriendBox } from './component/friend-box';
 import React from 'react';
-import { Inbox } from './component/inbox';
-import { Sidebar } from './component/sidebar';
-import { Wrapper } from './component/wrapper';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { MessengerPage } from './page/messenger-page';
+import { LoginPage } from './page/login-page';
 
 const App = () => {
     return (
-        <Wrapper type="wrapper-app">
-            <Sidebar />
-            <FriendBox />
-            <Inbox idUser="" />
-            <DetailInfoInbox />
-        </Wrapper>
+        <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route path="/messenger-page/:id" element={<MessengerPage />} />
+        </Routes>
     );
 };
 
