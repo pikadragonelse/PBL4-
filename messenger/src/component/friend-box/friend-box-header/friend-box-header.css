@@ -1,0 +1,39 @@
+.friend-box-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    font-size: var(--font-sm);
+}
+
+.friend-box-header-type {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--spacing-md);
+}
+
+.friend-box-header-type-item {
+    background-color: var(--main-color);
+    padding: var(--spacing-vr-sm) var(--spacing-md);
+    cursor: pointer;
+}
+
+.friend-box-header-general {
+    border-top-left-radius: var(--b-radius-mch);
+    border-bottom-left-radius: var(--b-radius-mch);
+}
+
+.friend-box-header-group {
+    border-top-right-radius: var(--b-radius-mch);
+    border-bottom-right-radius: var(--b-radius-mch);
+}
+
+.select-type-friend-box { 
+    background-color: var(--primary-color);
+    color: var(--main-color);
+}
+
+.friend-box-header-search-container {
+    margin: 0 var(--spacing-md);
+}

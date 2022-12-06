@@ -1,31 +1,46 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap');
 
 :root {
-  --main-color: #fff;
+  --main-color: rgb(246, 246, 246);
+  --main-color-transparent: rgba(246, 246, 246, 0.733);
   --sub-color: #e3e3e3;
   --sub-light-color: #eeecec;
-  --contrast-color: #1c1c1c;
+  --contrast-color: #353535;
+  --contrast-light-color: #3b3b3b;
   --sub-contrast-color: #f1f1f1;
-  --private-color: #6445E0;
-  --private-sub-color: #907be7;
+  --primary-color: #6445E0;
+  --primary-sub-color: #7350ff;
 
   /* spacing */
   --spacing-vr-sm: 5px;
   --spacing-sm: 10px;
   --spacing-l-sm: 20px;
   --spacing-md: 30px;
+  --spacing-md-1: 40px;
   --spacing-lg: 50px;
+  --spacing-lg-1: 60px;
+  --spacing-lg-3: 70px;
+  --spacing-lg-3: 80px;
 
   /* font size */
   --font-vr-sm: 0.6rem;
   --font-sm: 0.8rem;
+  --font-sm-1: 1rem;
+  --font-sm-2: 1.2rem;
   --font-md: 1.4rem;
   --font-lg: 1.6rem;
+  --font-lg-1: 1.8rem;
+  --font-lg-2: 2rem;
+  --font-lg-3: 2.2rem;
+  --font-lg-4: 2.4rem;
 
   /* Border-radius */
-  --border-radius-lt: 4px;
-  --border-radius-md: 16px;
-  --border-radius-mch: 9999px;
+  --b-radius-lt: 4px;
+  --b-radius-lt-1: 8px;
+  --b-radius-lt-1: 12px;
+  --b-radius-md: 16px;
+  --b-radius-mch: 9999px;
 
 
 }
@@ -48,6 +63,7 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
 
 #root {
@@ -69,4 +85,5 @@ button, input, textarea {
   outline: none;
   border: none;
 }
+
 

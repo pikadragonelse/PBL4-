@@ -1,4 +1,75 @@
 .detail-info-inbox {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 300px;
     background-color: var(--sub-color);
-    flex-grow: 1;
+    padding-top: var(--spacing-lg-3);
+    color: var(--contrast-color);
+    font-size: var(--font-sm);
 }
+
+.detail-info-inbox-container-avt {
+    --size-avt: 150px;
+    width: var(--size-avt);
+    height: var(--size-avt);
+}
+
+.detail-info-inbox-header {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.detail-info-inbox-nickname {
+    font-size: var(--font-md);
+    margin: 0;
+}
+
+.detail-info-inbox-alive {
+    font-size: var(--font-sm);
+    color: var(--contrast-light-color);
+}
+
+.detail-info-inbox-wrap-icon {
+    width: 100%;
+}
+
+.detail-info-inbox-container-icon {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 var(--spacing-lg);
+}
+
+.detail-info-inbox-icon {
+    --size-icon: 20px;
+    width: var(--size-icon);
+    height: var(--size-icon);
+
+    padding: var(--spacing-sm);
+    border-radius: var(--b-radius-mch);
+    color: var(--main-color);
+    background-color: var(--primary-color);
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.detail-info-inbox-icon:hover { 
+    background-color: var(--primary-sub-color);
+}
+
+.detail-info-inbox-wrap-feature {
+    width: 100%;
+}
+
+.detail-info-inbox-container-feature {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin:  0 var(--spacing-md); 
+}
+

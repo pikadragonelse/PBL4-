@@ -1,0 +1,32 @@
+.search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-sm);
+    border-radius: var(--b-radius-mch);
+    background-color: var(--main-color);
+}
+
+.search-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-icon {
+    padding-left: var(--spacing-sm);
+}
+
+.search-input {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid transparent;
+    font-size: var(--font-vr-sm);
+    padding: var(--spacing-sm);
+    border-radius: var(--b-radius-mch);
+
+}
+
+
+

@@ -11,7 +11,7 @@
 }
 
 .user-message  .message-content {
-    background-color: var(--private-color);
+    background-color: var(--primary-color);
     color: var(--sub-contrast-color);
 }
 
@@ -27,14 +27,14 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    border-radius: var( --border-radius-mch);
+    border-radius: var( --b-radius-mch);
 }
 
 .message-content {
     max-width: 300px;
     background-color: var(--sub-light-color);
     padding: var(--spacing-sm);
-    border-radius: var(--border-radius-md);
+    border-radius: var(--b-radius-md);
 }
 
 .message-content-text {

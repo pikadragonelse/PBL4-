@@ -1,0 +1,40 @@
+.login-content {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+    flex: 1;
+    margin: calc(2 * var(--spacing-lg-1));
+}
+
+.login-form {
+    flex: 0.4;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.login-feature {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.login-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-image {
+    width: 100%;
+}
+
+.login-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-l-sm);
+}
+
+.login-forgot-pass-link {
+    color: var(--primary-color);
+}

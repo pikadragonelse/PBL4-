@@ -1,0 +1,19 @@
+.logo-app {
+    display: flex;
+    gap: var(--spacing-sm);
+    color: var(--primary-color);
+    align-items: center;
+}
+
+.logo-app-icon {
+    font-size: var(--font-lg-4);
+}
+
+.logo-sidebar-icon {
+    font-size: var(--font-lg-1);
+}
+
+.logo-app-name {
+    line-height: 1;
+    font-size: var(--font-lg);
+}

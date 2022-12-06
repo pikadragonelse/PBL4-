@@ -1,0 +1,15 @@
+.header-login {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding: 0 calc(2* var(--spacing-lg-1));
+    background-color: var(--main-color-transparent);
+}
+
+.logo-login {
+    padding: var(--spacing-md) 0;
+}
+
+

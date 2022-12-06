@@ -8,16 +8,17 @@
 .message-box-main {
     display: flex;
     align-items: center;
+    padding: var(--spacing-sm) 0;
+    gap: var(--spacing-sm);
+    margin-right: var(--spacing-sm);
     flex: 1;
-    background-color: var(--sub-color);
-    padding: var(--spacing-sm);
-    border-radius: var(--border-radius-mch);
 }
 
 .message-box-input {
     flex: 1;
-    background-color: transparent;
-    
+    background-color: var(--sub-color);
+    padding: var(--spacing-sm);
+    border-radius: var(--b-radius-mch);
 }
 
 .message-box-method {
@@ -31,6 +32,10 @@
 }
 
 .message-box-icon:hover {
-    color: var(--private-color);
+    color: var(--primary-color);
+}
+
+.message-box-send-icon {
+    padding: var(--spacing-sm);
 }
 

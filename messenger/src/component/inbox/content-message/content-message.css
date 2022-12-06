@@ -7,7 +7,7 @@
 
 .content-message::-webkit-scrollbar-track
 {
-	border-radius: var(--border-radius-mch);
+	border-radius: var(--b-radius-mch);
 	background-color: var(--main-color);
 }
 
