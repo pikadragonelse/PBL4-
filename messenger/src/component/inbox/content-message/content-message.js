@@ -1,30 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import './content-message.css';
 import { Message } from './message';
 
-const ContentMessage = ({ idUser }) => {
-    const [listMessage, setListMessage] = useState([]);
+export const ContentMessage = forwardRef(({ idUser, listMessage }, contentMessageRefParents) => {
+    const contentMessageRef = useRef(null);
 
-    useEffect(() => {
-        fetch('http://localhost:3001/content')
-            .then((res) => res.json())
-            .then((data) => setListMessage(data));
-    }, []);
+    useImperativeHandle(contentMessageRefParents, () => {
+        return {
+            setScroll() {
+                contentMessageRef.current.scrollTop =
+                    contentMessageRef.current.scrollHeight - contentMessageRef.current.clientHeight;
+            },
+        };
+    });
 
     return (
-        <div className="content-message">
-            {listMessage.map((item, index) => (
+        <div ref={contentMessageRef} className="content-message">
+            {listMessage.map((item) => (
                 <Message
-                    key={index}
-                    type={item.idSender === 1 ? 'user-message' : ''}
-                    image="https://www.mordeo.org/files/uploads/2019/04/Spitz-Pet-Dog-4K-Ultra-HD-Mobile-Wallpaper-950x1689.jpg"
+                    key={item.idMessage}
+                    type={item.idSender === idUser ? 'user-message' : ''}
+                    image={process.env.PUBLIC_URL + '/avatar.jpg'}
                 >
                     {item.message}
                 </Message>
             ))}
         </div>
     );
-};
-
-export { ContentMessage };
+});
