@@ -19,12 +19,6 @@
     height: var(--size-img);
 }
 
-.header-inbox-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;  
-    border-radius: var(--border-radius-mch);  
-}
 
 .header-inbox-state-friend {
     font-size: var(--font-vr-sm);
@@ -35,7 +29,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    color: var(--private-color);
+    color: var(--primary-color);
 }
 
 .header-inbox-method-icon {
@@ -49,7 +43,7 @@
 
 .header-inbox-method-icon:hover {
     background-color: var(--sub-color);
-    border-radius: var(--border-radius-mch);
+    border-radius: var(--b-radius-mch);
 }
 
 .header-inbox-method-special {

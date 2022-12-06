@@ -2,7 +2,7 @@ import React from 'react';
 
 import './message.css';
 
-const Message = ({ children, type, image }) => {
+export const Message = ({ children, type, image }) => {
     return (
         <div className={`message ${type}`}>
             <div className="message-img-wrapper ">
@@ -14,5 +14,3 @@ const Message = ({ children, type, image }) => {
         </div>
     );
 };
-
-export { Message };

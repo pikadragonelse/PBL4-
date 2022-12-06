@@ -1,4 +1,35 @@
 .friend-box {
+    display: flex;
+    flex-direction: column;
+    width: 390px;
     background-color: var(--sub-color); 
-    flex-grow: 2;
+    overflow: hidden;
+    height: 100%;
+}
+
+.list-message-container {
+    flex: 1;
+    overflow: auto;
+    margin: var(--spacing-md);
+}
+
+.list-message-container::-webkit-scrollbar-track
+{
+	border-radius: var(--b-radius-mch);
+}
+
+.list-message-container::-webkit-scrollbar
+{
+	width: 8px;
+}
+
+.list-message-container::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.scroll-mask-list {
+    mask-image: linear-gradient(180deg,hsla(0,0%,100%,0),hsla(0,0%,100%,.8) 2%,#fff 25%);
 }

@@ -1,0 +1,12 @@
+.input-app {
+    padding: var(--spacing-sm);
+    background-color: var(--sub-light-color);
+    border-radius: var(--b-radius-lt-1);
+    width: 100%;
+    box-shadow:  0 5px 5px -5px var(--contrast-color);
+    border: 1.5px solid var(--sub-color);
+}
+
+.input-app:focus {
+    border: 1.5px solid var(--primary-color);
+}

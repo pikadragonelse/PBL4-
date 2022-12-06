@@ -1,0 +1,41 @@
+
+.list-message-friend-message {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-sm);
+    background-color: var(--main-color);
+    border-radius: var(--b-radius-md);
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.2 ease;
+    margin-right: var(--spacing-vr-sm);
+}
+
+.list-message-friend-message:hover { 
+    opacity: 0.9;
+}
+
+.list-message-friend-nickname {
+    font-weight: 500;
+    margin: unset;
+}
+
+.list-message-friend-content {
+    font-size: var(--font-vr-sm);
+    color: var(--contrast-light-color);
+}
+
+.list-message-friend-avt-container {
+    --size-avt: 50px;
+    width: var(--size-avt);
+    height: var(--size-avt);
+}
+
+.list-message-message-time {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+    font-size: var(--font-vr-sm);
+}

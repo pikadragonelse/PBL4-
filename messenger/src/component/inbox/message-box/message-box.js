@@ -1,26 +1,32 @@
-import {
-    faFaceSmile,
-    faImage,
-    faPaperclip,
-    faPaperPlane,
-    faPlusCircle,
-    faPlusSquare,
-} from '@fortawesome/free-solid-svg-icons';
+import { faFaceSmile, faImage, faPaperclip, faPaperPlane, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 
 import './message-box.css';
 
-const MessageBox = ({ handleSendMessage }) => {
+export const MessageBox = forwardRef(({ handleSendMessage, idUser }, inputRefParent) => {
     const inputRef = useRef(null);
+
     const sendMessage = () => {
         let message = {
-            idSender: 1,
+            idSender: idUser,
             message: inputRef.current.value,
             text: true,
         };
         handleSendMessage(message);
     };
+
+    useImperativeHandle(
+        inputRefParent,
+        () => {
+            return {
+                reset() {
+                    inputRef.current.value = '';
+                },
+            };
+        },
+        [],
+    );
 
     return (
         <div className="message-box">
@@ -38,6 +44,4 @@ const MessageBox = ({ handleSendMessage }) => {
             </div>
         </div>
     );
-};
-
-export { MessageBox };
+});

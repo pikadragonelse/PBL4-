@@ -1,0 +1,16 @@
+.detail-info-inbox-feature {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-sm);
+    background-color: var(--sub-light-color);
+    border-radius: var(--b-radius-lt-1);
+    cursor: pointer;
+    transition: background-color 0.2s linear;
+    width: 100%;
+}
+
+.detail-info-inbox-feature:hover { 
+    background-color: var(--main-color);
+}
+
