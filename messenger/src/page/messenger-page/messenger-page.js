@@ -5,15 +5,18 @@ import { Sidebar } from '../../component/sidebar';
 import { DetailInfoInbox } from '../../component/detail-info-inbox';
 import { Wrapper } from '../../component/wrapper';
 import { useLocation } from 'react-router';
+import { createBroker } from '../../broker';
 
 export const MessengerPage = () => {
     const location = useLocation();
 
+    const BrokerInstance = createBroker();
+
     return (
         <Wrapper type="wrapper-app">
             <Sidebar />
-            <FriendBox />
-            <Inbox user={location.state} />
+            <FriendBox user={location.state} sendToBroker={BrokerInstance.sendToBroker} />
+            <Inbox user={location.state} useSubscribe={BrokerInstance.useSubscribe} />
             <DetailInfoInbox />
         </Wrapper>
     );

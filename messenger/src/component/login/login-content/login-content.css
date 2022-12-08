@@ -3,7 +3,7 @@
     gap: var(--spacing-md);
     align-items: center;
     flex: 1;
-    margin: calc(2 * var(--spacing-lg-1));
+    margin: 0 calc(2 * var(--spacing-lg-1));
 }
 
 .login-form {
@@ -26,7 +26,8 @@
 }
 
 .login-image {
-    width: 100%;
+    width: 60%;
+    object-fit: contain;
 }
 
 .login-info {

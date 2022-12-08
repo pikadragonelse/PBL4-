@@ -5,30 +5,52 @@ import { HeaderInbox } from './header-inbox';
 import './inbox.css';
 import { MessageBox } from './message-box';
 
-export const Inbox = ({ user }) => {
-    const [listMessage, setListMessage] = useState([]);
+export const Inbox = ({ user, useSubscribe }) => {
+    const [listMessageOfGroup, setListMessageOfGroup] = useState([]);
     const [checkSendMessage, setCheckSendMessage] = useState(0);
+    const [listGroup, setListGroup] = useState([]);
+    const { idGroup, messageCount, unSubscribe } = useSubscribe('default');
 
     const inputRefParent = useRef(null);
     const contentMessageRefParent = useRef(null);
 
-    const getAllMessages = () => {
-        fetch(`http://localhost:8080/api/message/get-message?idGroup=1`, {
+    const getAllGroup = async () => {
+        await fetch(`http://localhost:8080/api/group/get-all-group?idUser=${user.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: user.token,
+                Authorization: `${user.type} ${user.token}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setListGroup(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    getAllGroup();
+    console.log(listGroup);
+
+    const getAllMessages = () => {
+        fetch(`http://localhost:8080/api/message/get-message?idGroup=${idGroup || listGroup[0].idGroup}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${user.type} ${user.token}`,
             },
         })
             .then((res) => res.json())
             .then((data) => {
-                setListMessage(data);
+                setListMessageOfGroup(data);
             })
             .catch((error) => console.log(error));
     };
 
     const sendMessage = (messageSended) => {
-        fetch(`http://localhost:8080/api/message/send-message?idGroup=1`, {
+        fetch(`http://localhost:8080/api/message/send-message?idGroup=${idGroup || listGroup[0].idGroup}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,29 +64,26 @@ export const Inbox = ({ user }) => {
             .catch((error) => console.log(error));
     };
 
-    useEffect(() => {
-        getAllMessages();
-        const timer = setTimeout(() => {
-            contentMessageRefParent.current.setScroll();
-        }, 100);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         contentMessageRefParent.current.setScroll();
+    //     }, 100);
 
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [checkSendMessage]);
+    //     return () => {
+    //         clearTimeout(timer);
+    //     };
+    // }, [checkSendMessage]);
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            getAllMessages();
-        }, 5000);
-
-        return () => {
-            clearInterval(timer);
-        };
-    });
+    // useEffect(() => {
+    //     // const timer = setInterval(() => {
+    //     //     getAllMessages();
+    //     // }, 1000);
+    //     // return () => {
+    //     //     clearInterval(timer);
+    //     // };
+    // });
 
     const handleSendMessage = (message) => {
-        console.log(message.idSender);
         if (message.message !== '') {
             sendMessage(message);
             inputRefParent.current.reset();
@@ -86,7 +105,7 @@ export const Inbox = ({ user }) => {
             className="inbox-main"
         >
             <HeaderInbox />
-            <ContentMessage ref={contentMessageRefParent} idUser={user.id} listMessage={listMessage} />
+            <ContentMessage ref={contentMessageRefParent} idUser={user.id} listMessage={listMessageOfGroup} />
             <MessageBox ref={inputRefParent} handleSendMessage={handleSendMessage} idUser={user.id} />
         </div>
     );

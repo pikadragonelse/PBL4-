@@ -7,9 +7,7 @@ import './login-page.css';
 export const LoginPage = () => {
     return (
         <Wrapper type="wrapper-app">
-            <div className="login-page-container">
-                <Login />
-            </div>
+            <Login />
         </Wrapper>
     );
 };
