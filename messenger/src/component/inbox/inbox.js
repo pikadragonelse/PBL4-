@@ -5,37 +5,17 @@ import { HeaderInbox } from './header-inbox';
 import './inbox.css';
 import { MessageBox } from './message-box';
 
-export const Inbox = ({ user, useSubscribe }) => {
+export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
+    const [listGroup, setListGroup] = useState([]);
     const [listMessageOfGroup, setListMessageOfGroup] = useState([]);
     const [checkSendMessage, setCheckSendMessage] = useState(0);
-    const [listGroup, setListGroup] = useState([]);
-    const { idGroup, messageCount, unSubscribe } = useSubscribe('default');
+    const { newestMessage, messageCount, unSubscribe } = useSubscribe('default');
 
     const inputRefParent = useRef(null);
     const contentMessageRefParent = useRef(null);
 
-    const getAllGroup = async () => {
-        await fetch(`http://localhost:8080/api/group/get-all-group?idUser=${user.id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `${user.type} ${user.token}`,
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setListGroup(data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-
-    getAllGroup();
-    console.log(listGroup);
-
-    const getAllMessages = () => {
-        fetch(`http://localhost:8080/api/message/get-message?idGroup=${idGroup || listGroup[0].idGroup}`, {
+    const getAllGroup = () => {
+        fetch(`http://localhost:8080/api/group/get-all-group?idUser=${user.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,44 +24,94 @@ export const Inbox = ({ user, useSubscribe }) => {
         })
             .then((res) => res.json())
             .then((data) => {
-                setListMessageOfGroup(data);
+                setListGroup(data);
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const setNewestGroup = () => {
+        try {
+            let idGroupOfNewestMessage = 0;
+            let newestMessageTime = 10000;
+            let timeNow = Date.now();
+
+            listGroup.forEach((group) => {
+                let timeSend = new Date(group.time);
+                let distanceTime = timeNow - timeSend.getTime();
+
+                if (distanceTime < newestMessageTime) {
+                    newestMessageTime = distanceTime;
+                    idGroupOfNewestMessage = group.idGroup;
+                }
+            });
+
+            sendToBroker('default', idGroupOfNewestMessage);
+        } catch (error) {}
+    };
+
+    const getAllMessages = () => {
+        try {
+            fetch(`http://localhost:8080/api/message/get-message?idGroup=${newestMessage || listGroup[0].idGroup}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `${user.type} ${user.token}`,
+                },
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    setListMessageOfGroup(data);
+                })
+                .catch((error) => console.log(error));
+        } catch (error) {}
     };
 
     const sendMessage = (messageSended) => {
-        fetch(`http://localhost:8080/api/message/send-message?idGroup=${idGroup || listGroup[0].idGroup}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: user.token,
-            },
-            body: JSON.stringify(messageSended),
-        })
-            .then(() => {
-                setCheckSendMessage((prev) => (prev = ++prev));
+        try {
+            fetch(`http://localhost:8080/api/message/send-message?idGroup=${newestMessage || listGroup[0].idGroup}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: user.token,
+                },
+                body: JSON.stringify(messageSended),
             })
-            .catch((error) => console.log(error));
+                .then(() => {
+                    setCheckSendMessage((prev) => (prev = ++prev));
+                })
+                .catch((error) => console.log(error));
+        } catch (error) {}
     };
 
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         contentMessageRefParent.current.setScroll();
-    //     }, 100);
+    useEffect(() => {
+        getAllGroup();
+        getAllMessages();
+    }, [newestMessage]);
 
-    //     return () => {
-    //         clearTimeout(timer);
-    //     };
-    // }, [checkSendMessage]);
+    useEffect(() => {}, []);
 
-    // useEffect(() => {
-    //     // const timer = setInterval(() => {
-    //     //     getAllMessages();
-    //     // }, 1000);
-    //     // return () => {
-    //     //     clearInterval(timer);
-    //     // };
-    // });
+    useEffect(() => {
+        getAllMessages();
+
+        const timer = setTimeout(() => {
+            contentMessageRefParent.current.setScroll();
+        }, 100);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [checkSendMessage, listGroup]);
+
+    useEffect(() => {
+        // const timer = setInterval(() => {
+        //     getAllMessages();
+        // }, 1000);
+        // return () => {
+        //     clearInterval(timer);
+        // };
+    });
 
     const handleSendMessage = (message) => {
         if (message.message !== '') {
