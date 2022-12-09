@@ -31,26 +31,6 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
             });
     };
 
-    const setNewestGroup = () => {
-        try {
-            let idGroupOfNewestMessage = 0;
-            let newestMessageTime = 10000;
-            let timeNow = Date.now();
-
-            listGroup.forEach((group) => {
-                let timeSend = new Date(group.time);
-                let distanceTime = timeNow - timeSend.getTime();
-
-                if (distanceTime < newestMessageTime) {
-                    newestMessageTime = distanceTime;
-                    idGroupOfNewestMessage = group.idGroup;
-                }
-            });
-
-            sendToBroker('default', idGroupOfNewestMessage);
-        } catch (error) {}
-    };
-
     const getAllMessages = () => {
         try {
             fetch(`http://localhost:8080/api/message/get-message?idGroup=${newestMessage || listGroup[0].idGroup}`, {
@@ -74,7 +54,7 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: user.token,
+                    Authorization: `${user.type} ${user.token}`,
                 },
                 body: JSON.stringify(messageSended),
             })
@@ -114,6 +94,7 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
     });
 
     const handleSendMessage = (message) => {
+        console.log(message);
         if (message.message !== '') {
             sendMessage(message);
             inputRefParent.current.reset();

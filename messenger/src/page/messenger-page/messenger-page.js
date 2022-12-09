@@ -15,12 +15,12 @@ export const MessengerPage = () => {
     return (
         <Wrapper type="wrapper-app">
             <Sidebar />
-            <FriendBox user={location.state} sendToBroker={BrokerInstance.sendToBroker} />
-            <Inbox
+            <FriendBox
                 user={location.state}
-                sendToBroker={BrokerInstance.sendToBroker}
                 useSubscribe={BrokerInstance.useSubscribe}
+                sendToBroker={BrokerInstance.sendToBroker}
             />
+            <Inbox user={location.state} useSubscribe={BrokerInstance.useSubscribe} />
             <DetailInfoInbox />
         </Wrapper>
     );
