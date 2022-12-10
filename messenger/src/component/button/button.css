@@ -4,11 +4,12 @@
     min-width: 150px;
     font-size: var(--font-sm);
     cursor: pointer;
-    transition: background-color 0.1s ease-out;
+    transition: background-color 0.2s ease;
+    background-color: var(--sub-color);
 }
 
 .button-app:hover {
-    background-color: var(--sub-color);
+    background-color: var(--sub-dark-color);
 }
 
 .button-primary {

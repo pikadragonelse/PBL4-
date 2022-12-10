@@ -1,6 +1,7 @@
 import { faFaceSmile, faImage, faPaperclip, faPaperPlane, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
+import React from 'react';
 
 import './message-box.css';
 

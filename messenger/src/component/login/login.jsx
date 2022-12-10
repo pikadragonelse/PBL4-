@@ -1,6 +1,6 @@
-import React from 'react';
-import { HeaderLogin } from './header-login/header-login';
+import { HeaderLogin } from './header-login';
 import { LoginContent } from './login-content';
+import React from 'react';
 
 import './login.css';
 export const Login = () => {

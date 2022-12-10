@@ -1,0 +1,91 @@
+.form-sign-in-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    width: 400px;
+    position: absolute;
+    transition: opacity 0.3s ease-in;
+    opacity: 1;
+    right: 0;
+}
+
+.form-sign-in-container.hidden {
+    opacity: 0;
+}
+
+.form-sign-in-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.form-sign-in-title {
+    margin: 0;
+}
+
+.form-sign-in-footer {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.form-sign-in-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.form-sign-in-main-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.input-title {
+    margin: 0;
+    font-size: var(--font-sm);
+}
+
+.special-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.info-gender-container {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-l-sm);
+
+}
+
+.special-input .input-date-container {
+    flex: 0.72;
+}
+
+.info-gender {
+    display: flex;
+    flex: 1;
+    gap: var(--spacing-sm);
+    font-size: var(--font-sm);
+}
+
+
+
+#radio-male, #radio-female {
+    margin: 0;
+}
+
+
+.form-sign-in-footer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}

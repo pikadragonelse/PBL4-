@@ -4,17 +4,29 @@
     display: flex;
     align-items: center;
     padding: var(--spacing-sm);
-    background-color: var(--main-color);
     border-radius: var(--b-radius-md);
     gap: var(--spacing-sm);
     cursor: pointer;
     opacity: 1;
     transition: opacity 0.2 ease;
     margin-right: var(--spacing-vr-sm);
+    transition: background-color 0.2s ease;
+}
+
+.list-message-friend-message:hover {
+    background-color: var(--main-color);
+}
+
+.list-message-friend-message-active {
+    background-color: var(--main-color);
 }
 
 .list-message-friend-message:hover { 
     opacity: 0.9;
+}
+
+.list-message-friend-message-active:hover {
+    opacity: 1;
 }
 
 .list-message-friend-nickname {

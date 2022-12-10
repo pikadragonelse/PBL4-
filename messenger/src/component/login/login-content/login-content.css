@@ -1,40 +1,27 @@
 .login-content {
+    position: relative;
     display: flex;
     gap: var(--spacing-md);
     align-items: center;
     flex: 1;
-    margin: calc(2 * var(--spacing-lg-1));
-}
-
-.login-form {
-    flex: 0.4;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-}
-
-.login-feature {
-    display: flex;
-    gap: var(--spacing-sm);
+    margin: 0 calc(2 * var(--spacing-lg-1));
 }
 
 .login-image-container {
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
+    width: 900px;
+    right: 0;
+    transition: transform 0.3s linear;
+}
+
+.show-sign-in-form {
+    transform: translateX(-400px);
 }
 
 .login-image {
-    width: 100%;
-}
-
-.login-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-l-sm);
-}
-
-.login-forgot-pass-link {
-    color: var(--primary-color);
+    width: 60%;
+    object-fit: contain;
 }
