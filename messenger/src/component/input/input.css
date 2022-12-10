@@ -10,3 +10,14 @@
 .input-app:focus {
     border: 1.5px solid var(--primary-color);
 }
+
+.input-none-decor {
+    box-shadow:  none;
+    border: none;
+    background-color: unset;
+    padding-left: 0;
+    padding-right: 0; 
+    border-radius: none;
+}
+
+

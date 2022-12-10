@@ -1,4 +1,5 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { forwardRef, useImperativeHandle, useRef } from 'react';
+import React from 'react';
 
 import './content-message.css';
 import { Message } from './message';

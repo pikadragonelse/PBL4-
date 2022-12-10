@@ -1,0 +1,32 @@
+.login-form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    opacity: 1;
+    transition: opacity 0.3s ease-out;
+    position: absolute;
+    left: 0;
+}
+
+.login-form.hidden {
+    opacity: 0;
+}
+
+
+.login-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-l-sm);
+}
+
+.login-forgot-pass-link {
+    color: var(--primary-color);
+    font-size: var(--font-sm);
+}
+
+
+.login-feature {
+    display: flex;
+    gap: var(--spacing-sm);
+}

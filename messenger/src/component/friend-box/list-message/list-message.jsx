@@ -1,5 +1,5 @@
-import React from 'react';
 import { ListMessageItem } from './list-message-item';
+import React from 'react';
 
 import './list-message.css';
 

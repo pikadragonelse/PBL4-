@@ -1,5 +1,5 @@
-import React from 'react';
 import { Search } from '../../search';
+import React from 'react';
 
 import './friend-box-header.css';
 

@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { FriendBoxHeader } from './friend-box-header';
+import React from 'react';
 
 import './friend-box.css';
 import { ListMessage } from './list-message';
