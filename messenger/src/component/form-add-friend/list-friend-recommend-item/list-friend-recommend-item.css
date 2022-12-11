@@ -1,0 +1,39 @@
+.list-friend-recommend-item {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--b-radius-md);
+    transition: background-color 0.2s ease;
+    padding: var(--spacing-sm);
+    cursor: pointer;
+}
+
+.list-friend-recommend-item:hover {
+    background-color: var(--sub-color);
+}
+
+.list-friend-recommend-info {
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+}
+
+.list-friend-recommend-item-container-avt {
+    --size-avt: 60px;
+    width: var(--size-avt);
+    height: var(--size-avt);
+
+}
+
+.list-friend-recommend-item-name {
+    font-weight: 400;
+    margin: 0;
+    transition: text-decoration 0.2s ease-in-out;
+    font-size: var(--font-sm);
+}
+
+.list-friend-recommend-item:hover .list-friend-recommend-item-name{
+    text-decoration: underline;
+}
+

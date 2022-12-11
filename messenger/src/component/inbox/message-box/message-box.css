@@ -1,24 +1,80 @@
 .message-box {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: var(--spacing-sm);
     padding: var(--spacing-sm);
+    padding-bottom: var(--spacing-l-sm);
 }
 
 .message-box-main {
     display: flex;
-    align-items: center;
-    padding: var(--spacing-sm) 0;
+    align-items: flex-end;
     gap: var(--spacing-sm);
     margin-right: var(--spacing-sm);
     flex: 1;
 }
 
+.message-box-input-container {
+    position: relative;
+    display: flex;
+    flex-direction:  column;
+    border-radius: var(--b-radius-mch);
+    background-color: var(--sub-color);
+    flex: 1;
+}
+
+.message-box-image-container {
+    --size-image: 50px;
+    position: relative;
+    width: var(--size-image);
+    height: var(--size-image);
+    border-radius: var(--b-radius-lt);
+    margin: var(--spacing-sm);
+    overflow: hidden;
+    display: none;
+}
+
+.message-box-image-input {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.message-box-input-image-icon {
+    --size-icon: 15px;
+    width: var(--size-icon);
+    height: var(--size-icon);
+    position: absolute;
+    padding: var(--spacing-vr-sm);
+    top: 0;
+    right: 0;
+    border-radius: var(--b-radius-mch);
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+    background-color: var(--main-color-transparent);
+}
+
+.message-box-input-image-icon:hover { 
+    background-color: var(--light-transparent-color);
+}
+
+.show-image-input-container {
+    border-radius: var(--b-radius-md);
+}
+
+.show-image-input {
+    display: block;
+}
+
+
+.message-box-file-input {
+    display: none;
+}
+
 .message-box-input {
     flex: 1;
-    background-color: var(--sub-color);
+    background-color: transparent;
     padding: var(--spacing-sm);
-    border-radius: var(--b-radius-mch);
 }
 
 .message-box-method {
@@ -27,6 +83,10 @@
 }
 
 .message-box-icon {
+    --size-icon: 22px;
+    width: vaR(--size-icon);
+    height: var(--size-icon);
+    display: flex;
     transition: color 0.1s ease-out;
     cursor: pointer;
 }
@@ -36,6 +96,6 @@
 }
 
 .message-box-send-icon {
-    padding: var(--spacing-sm);
+    padding: 0 var(--spacing-sm);
 }
 

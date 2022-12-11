@@ -4,9 +4,9 @@ import React from 'react';
 
 import './search.css';
 
-export const Search = () => {
+export const Search = ({className}) => {
     return (
-        <div className="search">
+        <div className={`search ${className}`}>
             <div className="search-icon-container">
                 <FontAwesomeIcon icon={faSearch} className="search-icon" />
             </div>

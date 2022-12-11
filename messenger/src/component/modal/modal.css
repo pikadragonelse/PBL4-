@@ -4,9 +4,26 @@
     right: 0;
     left: 0;
     bottom: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
+    animation: easeIn 0.2s;
+    transition: animation;
+    z-index: 99999;
+}
+
+@keyframes easeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+
+    }
+}
+
+.modal-wrapper.modal-open {
+    display: flex;
 }
 
 .overlay-modal {
@@ -15,4 +32,49 @@
     height: 100%;
     background-color: var(--contrast-transparent-color);
     z-index: 9999;
+}
+
+.form {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-md);
+    background-color: var(--main-color);
+    width: 500px;
+    z-index: 99999;
+    padding: var(--spacing-md);
+    border-radius: var(--b-radius-md);
+}
+
+.form-header {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+
+.form-title {
+    text-transform: uppercase;
+    font-size: var(--font-sm);
+    margin: 0;
+}
+
+.form-close-icon {
+    --size-icon: 20px;
+    width: var(--size-icon);
+    height: var(--size-icon);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    transition: background-color 0.2s ease;
+    border-radius: var(--b-radius-mch);
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-sm);
+}
+
+.form-close-icon:hover {
+    background-color: var(--sub-color);
 }

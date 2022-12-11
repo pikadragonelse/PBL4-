@@ -16,7 +16,7 @@ export const createBroker = () => {
         },
 
         useSubscribe: (channelName) => {
-            const [newestMessage, setNewestMessage] = React.useState(undefined);
+            const [newestMessage, setNewestMessage] = React.useState(0);
             const [messageCount, setMessageCount] = React.useState(0);
             const subscribeId = React.useRef(`${Math.random()}`);
 

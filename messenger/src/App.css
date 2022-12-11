@@ -13,6 +13,7 @@
   --sub-contrast-color: #f1f1f1;
   --primary-color: #6445E0;
   --primary-sub-color: #7350ff;
+  --light-transparent-color: rgba(246, 246, 246, 0.46);
 
   /* spacing */
   --spacing-vr-sm: 5px;

@@ -2,17 +2,21 @@ import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 import { FriendBoxHeader } from './friend-box-header';
 import React from 'react';
+import { ListMessage } from './list-message';
+import { Loading } from '../loading';
+
 
 import './friend-box.css';
-import { ListMessage } from './list-message';
 
-export const FriendBox = ({ user, sendToBroker }) => {
+
+export const FriendBox = ({ user, sendToBroker, useSubscribe }) => {
     const listMessageContainerRef = useRef();
+    const [isLoading, setIsLoading] = useState(true);
     const [isMask, setIsMask] = useState(false);
 
     const [listGroup, setListGroup] = useState([]);
 
-    useEffect(() => {
+    const getAllGroup = () => {
         fetch(`http://localhost:8080/api/group/get-all-group?idUser=${user.id}`, {
             method: 'GET',
             headers: {
@@ -23,11 +27,22 @@ export const FriendBox = ({ user, sendToBroker }) => {
             .then((response) => response.json())
             .then((data) => {
                 setListGroup(data);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            getAllGroup();
+        }, 1000);
+        return () => {
+            clearInterval(timer);
+        };
+    });
+
 
     const handleScrollList = (event) => {
         if (event.target.scrollTop > 20) {
@@ -51,7 +66,11 @@ export const FriendBox = ({ user, sendToBroker }) => {
                 ref={listMessageContainerRef}
                 className={`list-message-container ${isMask === true ? 'scroll-mask-list' : ''}`}
             >
-                <ListMessage listGroup={listGroupAfterSort} sendToBroker={sendToBroker} />
+                <div className={`friend-box-loading-container ${isLoading === false ? 'loading-hidden' : ''}`}>
+                    <Loading />
+                </div>
+                
+                <ListMessage  listGroup={listGroupAfterSort} sendToBroker={sendToBroker} />
             </div>
         </div>
     );
