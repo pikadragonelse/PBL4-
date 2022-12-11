@@ -28,3 +28,18 @@
     height: var(--size-img);
 }
 
+.sidebar-icon {
+    --size-icon: 22px;
+    width: var(--size-icon);
+    height: var(--size-icon);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: var(--b-radius-mch);
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-icon:hover {
+    color: var(--primary-color);
+    background-color: var(--sub-color);
+}
+

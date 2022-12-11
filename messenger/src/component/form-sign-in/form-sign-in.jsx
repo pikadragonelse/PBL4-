@@ -13,7 +13,7 @@ export const FormSignIn = ({ isHidden, signInHandle, handleHideSignInForm }) => 
         const form = e.target
         signInHandle(e, form)
       }}
-      className={`form-sign-in-container ${isHidden ? 'hidden' : ''}`}
+      className={`form-sign-in-container ${isHidden === true ? 'hidden' : ''}`}
     >
       <div className="form-sign-in-header">
         <h2 className="form-sign-in-title">Sign in</h2>

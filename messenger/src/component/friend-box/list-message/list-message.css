@@ -3,4 +3,5 @@
     gap: var(--spacing-sm);
     flex-direction: column;
     font-size: var(--font-sm);
+
 }

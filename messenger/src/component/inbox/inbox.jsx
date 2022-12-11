@@ -72,31 +72,28 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
         getAllMessages();
     }, [newestMessage]);
 
-    useEffect(() => {}, []);
-
     useEffect(() => {
         getAllMessages();
 
-        const timer = setTimeout(() => {
-            contentMessageRefParent.current.setScroll();
-        }, 100);
-
-        return () => {
-            clearTimeout(timer);
-        };
-    }, [checkSendMessage, listGroup]);
-
-    useEffect(() => {
         // const timer = setInterval(() => {
-        //     getAllMessages();
-        // }, 1000);
+        //     contentMessageRefParent.current.setScroll();
+        // }, 0);
+
         // return () => {
         //     clearInterval(timer);
         // };
+    }, [checkSendMessage, listGroup]);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            getAllMessages();
+        }, 1000);
+        return () => {
+            clearInterval(timer);
+        };
     });
 
     const handleSendMessage = (message) => {
-        console.log(message);
         if (message.message !== '') {
             sendMessage(message);
             inputRefParent.current.reset();

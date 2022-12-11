@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <form id="new_document_attachment" method="post">
+            <div class="actions"><input type="submit" name="commit" value="Submit" /></div>
+            <input type="file" id="document_attachment_doc" />
+        </form>
+    </body>
+    <script language="JavaScript">
+        const form = document.getElementById('new_document_attachment');
+        const fileInput = document.getElementById('document_attachment_doc');
+
+        fileInput.addEventListener('change', () => {
+            form.submit();
+        });
+
+        window.addEventListener('paste', (e) => {
+            fileInput.files = e.clipboardData.files;
+        });
+    </script>
+</html>

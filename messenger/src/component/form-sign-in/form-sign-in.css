@@ -4,14 +4,19 @@
     gap: var(--spacing-md);
     width: 400px;
     position: absolute;
-    transition: opacity 0.3s ease-in;
     opacity: 1;
     right: 0;
+    transform: scale(1);
+    transition: opacity 0.3s ease-in;
+
 }
 
 .form-sign-in-container.hidden {
     opacity: 0;
+    transform: scale(0);
 }
+
+
 
 .form-sign-in-header {
     display: flex;

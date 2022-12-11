@@ -1,16 +1,23 @@
 import { ListMessageItem } from './list-message-item';
-import React from 'react';
+import React, { useRef } from 'react';
+
 
 import './list-message.css';
 
 export const ListMessage = ({ listGroup, sendToBroker }) => {
     const [idGroupActive, setIdGroupActive] = React.useState(undefined);
+    const tempRef = useRef(0);
 
     React.useEffect(() => {
         try {
-            setIdGroupActive(listGroup[0].idGroup);
-        } catch (Error) {}
+            if (tempRef.current === 0) {
+                setIdGroupActive(listGroup[0].idGroup);
+                tempRef.current++;
+            }
+        } catch (Error) {
+        }
     }, [listGroup]);
+
 
     return (
         <ul className="list-message">
