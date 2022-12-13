@@ -11,6 +11,7 @@ export const ListMessageItem = ({
     sendToBroker,
     isActive,
     setIdGroupActive,
+    typeMessage,
 }) => {
     let timeSend = new Date(timeMessage);
     let timeNow = Date.now();
@@ -38,6 +39,13 @@ export const ListMessageItem = ({
         stringTimeShow = `${distanceTimeYears} years ago`;
     }
 
+    const lastMessageMap = {
+        0: lastMessage,
+        1: 'Sent a image',
+        2: 'Sent a voice',
+        3: 'Sent a video',
+    };
+
     return (
         <li
             onClick={() => {
@@ -51,7 +59,7 @@ export const ListMessageItem = ({
             </div>
             <div className="list-message-friend-info">
                 <h4 className="list-message-friend-nickname">{nameSender}</h4>
-                <p className="list-message-friend-content">{lastMessage}</p>
+                <p className="list-message-friend-content">{lastMessageMap[typeMessage]}</p>
             </div>
             <p className="list-message-message-time">{stringTimeShow}</p>
         </li>

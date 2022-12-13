@@ -59,7 +59,7 @@ export const FormSignIn = ({ isHidden, signInHandle, handleHideSignInForm }) => 
                     id="radio-male"
                     name="gender-radio"
                   />
-                  <label for="radio-male">Male</label>
+                  <label htmlFor="radio-male">Male</label>
                 </div>
 
                 <div className="info-gender">
@@ -69,7 +69,7 @@ export const FormSignIn = ({ isHidden, signInHandle, handleHideSignInForm }) => 
                     id="radio-female"
                     name="gender-radio"
                   />
-                  <label for="radio-female">Female</label>
+                  <label htmlFor="radio-female">Female</label>
                 </div>
               </div>
               

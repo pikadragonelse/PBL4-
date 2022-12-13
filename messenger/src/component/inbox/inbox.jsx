@@ -17,7 +17,7 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
     const contentMessageRefParent = useRef(null);
 
     const getAllGroup = () => {
-        fetch(`http://localhost:8080/api/group/get-all-group?idUser=${user.id}`, {
+        fetch(`http://localhost:8080/api/group/get-all-group`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,19 +61,21 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
                 body: JSON.stringify(messageSended),
             })
                 .then(() => {
+                    console.log(messageSended);
                     setCheckSendMessage((prev) => (prev = ++prev));
                 })
                 .catch((error) => console.log(error));
-        } catch (error) {}
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
         getAllGroup();
-        getAllMessages();
     }, [newestMessage]);
 
     useEffect(() => {
-        getAllMessages();
+        // getAllMessages();
 
         // const timer = setInterval(() => {
         //     contentMessageRefParent.current.setScroll();
@@ -104,19 +106,14 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
         <div
             onKeyDown={(event) => {
                 if (event.keyCode === 13) {
-                    let message = {
-                        idSender: user.id,
-                        message: event.target.value,
-                        text: true,
-                    };
-                    handleSendMessage(message);
+                    inputRefParent.current.sendMessage();
                 }
             }}
             className="inbox-main"
         >
             <HeaderInbox />
             <ContentMessage ref={contentMessageRefParent} idUser={user.id} listMessage={listMessageOfGroup} />
-            <MessageBox ref={inputRefParent} handleSendMessage={handleSendMessage} idUser={user.id} />
+            <MessageBox ref={inputRefParent} handleSendMessage={handleSendMessage}  />
         </div>
     );
 };

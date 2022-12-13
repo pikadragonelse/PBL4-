@@ -7,26 +7,72 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Modal } from '../modal';
 import { FormAddFriend } from '../form-add-friend';
-
+import { useState } from 'react';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/animations/perspective.css';
 
 import './sidebar.css';
-import { useRef } from 'react';
 
+const iconSideBarIconMap = [faComments, faCircleUser, faPhoneVolume, faUserPlus];
 export const Sidebar = () => {
+    const [isOpenModal, setIsOpenModal] = useState(false);
 
-    const modalParentsRef = useRef(null);
+    const methodSidebarMap = {
+        comments: () => {
+            setIsOpenModal(true);
+        },
+        'circle-user': () => {
+            setIsOpenModal(true);
+        },
+        'phone-volume': () => {
+            setIsOpenModal(true);
+        },
+        'user-plus': () => {
+            setIsOpenModal(true);
+        },
+    };
+
+    const nameTooltipMap = {
+        comments: 'Stranger message',
+        'circle-user': 'Your information',
+        'phone-volume': 'Call history',
+        'user-plus': 'Add new friend',
+    };
 
     return (
         <div className="sidebar-main">
             <div className="sidebar-nav">
-                <Modal ref={modalParentsRef} content={<FormAddFriend/>} type="add-friend"/>
-                <Link to='/' className="sidebar-logo">
+                <Modal
+                    isOpenModalRequest={isOpenModal}
+                    setIsOpenModalRequest={setIsOpenModal}
+                    content={<FormAddFriend />}
+                    type="add-friend"
+                />
+                <Link to="/" className="sidebar-logo">
                     <Logo type="logo-sidebar" />
                 </Link>
-                <FontAwesomeIcon icon={faComments} className="sidebar-icon"/>
-                <FontAwesomeIcon icon={faCircleUser} className="sidebar-icon"/>
-                <FontAwesomeIcon icon={faPhoneVolume} className="sidebar-icon"/>
-                <FontAwesomeIcon onClick={() => modalParentsRef.current.openModal()} icon={faUserPlus} className="sidebar-icon "/>
+                {iconSideBarIconMap.map((item) => (
+                    <Tippy
+                        content={nameTooltipMap[item.iconName]}
+                        interactive={true}
+                        theme='#6445E0'
+                        data-animation="perspective"
+                        interactiveBorder={30}
+                        placement="right"
+                        duration={20}
+                        className="sidebar-tippy"
+                    >
+                        <FontAwesomeIcon
+                            onClick={() => {
+                                methodSidebarMap[item.iconName]();
+                            }}
+                            key={item.icon}
+                            icon={item}
+                            className="sidebar-icon"
+                        />
+                    </Tippy>
+                ))}
             </div>
             <div className="sidebar-footer">
                 <div className="avatar-sidebar-container">

@@ -7,31 +7,16 @@ import { Search } from '../search'
 
 
 import './modal.css'
-import { useRef } from 'react'
 
-export const Modal = forwardRef(({ content, type }, modalParentsRef) => {
-  const [isOpenModal, setIsOpenModal] = useState(false)
+export const Modal = ({ content, type, isOpenModalRequest, setIsOpenModalRequest }) => {
 
-  const modalRef = useRef(null);
-
-  useImperativeHandle(
-    modalParentsRef,
-    () => {
-      return {
-        openModal() {
-          setIsOpenModal(true);
-        }
-      }
-    },
-    [],
-  )
 
   const handleAddFriend = (e, form) => {
       e.preventDefault();
   }
 
   return ReactDOM.createPortal(
-    <div ref={modalRef} className={`modal-wrapper ${isOpenModal === true ? 'modal-open' : ''}`}>
+    <div  className={`modal-wrapper ${isOpenModalRequest === true ? 'modal-open' : ''}`}>
       <div className="overlay-modal"></div>
       <form onSubmit={e => {
         const target = e.target;
@@ -46,11 +31,11 @@ export const Modal = forwardRef(({ content, type }, modalParentsRef) => {
           ) : (
             ''
           )}
-          <FontAwesomeIcon onClick={() => setIsOpenModal(false)} icon={faTimes} className="form-close-icon" />
+          <FontAwesomeIcon onClick={() => setIsOpenModalRequest(false)} icon={faTimes} className="form-close-icon" />
         </div>
         {content}
       </form>
     </div>,
     document.querySelector('body'),
   )
-});
+};
