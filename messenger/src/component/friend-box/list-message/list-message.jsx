@@ -29,6 +29,7 @@ export const ListMessage = ({ listGroup, sendToBroker }) => {
                     nameSender={group.nameSender}
                     lastMessage={group.message}
                     timeMessage={group.time}
+                    typeMessage={group.type}
                     setIdGroupActive={setIdGroupActive}
                     isActive={`${
                         idGroupActive != null && idGroupActive === group.idGroup

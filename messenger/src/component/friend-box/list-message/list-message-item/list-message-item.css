@@ -35,8 +35,13 @@
 }
 
 .list-message-friend-content {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
     font-size: var(--font-vr-sm);
     color: var(--contrast-light-color);
+
 }
 
 .list-message-friend-avt-container {

@@ -17,7 +17,7 @@ export const FriendBox = ({ user, sendToBroker, useSubscribe }) => {
     const [listGroup, setListGroup] = useState([]);
 
     const getAllGroup = () => {
-        fetch(`http://localhost:8080/api/group/get-all-group?idUser=${user.id}`, {
+        fetch(`http://localhost:8080/api/group/get-all-group`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

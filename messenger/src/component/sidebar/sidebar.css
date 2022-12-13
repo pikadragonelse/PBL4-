@@ -43,3 +43,10 @@
     background-color: var(--sub-color);
 }
 
+.sidebar-tippy {
+    background-color: var(--primary-color);
+    color: var(--main-color);
+    font-size: vaR(--font-sm);
+    border-radius: var(--b-radius-lt);
+}
+
