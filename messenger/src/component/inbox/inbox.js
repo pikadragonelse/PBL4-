@@ -11,6 +11,7 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
     const [listGroup, setListGroup] = useState([]);
     const [listMessageOfGroup, setListMessageOfGroup] = useState([]);
     const [checkSendMessage, setCheckSendMessage] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
     const { newestMessage } = useSubscribe('default');
 
     const inputRefParent = useRef(null);
@@ -44,6 +45,7 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
             })
                 .then((res) => res.json())
                 .then((data) => {
+                    setIsLoading(false);
                     setListMessageOfGroup(data);
                 })
                 .catch((error) => console.log(error));
@@ -109,7 +111,7 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
             className="inbox-main"
         >
             <HeaderInbox />
-            <ContentMessage ref={contentMessageRefParent} idUser={user.id} listMessage={listMessageOfGroup} />
+            <ContentMessage ref={contentMessageRefParent} isLoading={isLoading} idUser={user.id} listMessage={listMessageOfGroup} />
             <MessageBox ref={inputRefParent} handleSendMessage={handleSendMessage}  />
         </div>
     );

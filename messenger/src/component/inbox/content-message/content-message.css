@@ -23,3 +23,7 @@
 	background-color: var(--contrast-color);
     cursor: pointer;
 }
+
+.content-message-loading {
+	padding: 0;
+}

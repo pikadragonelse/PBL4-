@@ -15,41 +15,38 @@ const messageContentSubClassMap = {
 
 export const Message = ({ children, type, image, typeMessage }) => {
     const [isPlayAudio, setIsPlayAudio] = useState(false);
-    const [currentTime, setCurrentTime] = useState("0:00");
-    const [durationTime, setDurationTime] = useState("0:00");
+    const [currentTime, setCurrentTime] = useState('0:00');
+    const [durationTime, setDurationTime] = useState('0:00');
     const [isStartAudio, setIsStartAudio] = useState(true);
 
     const audioRef = useRef(null);
     const timelineRef = useRef(null);
 
     const getTimeCodeFromNum = (num) => {
-
+        if (audioRef.current.duration < 1) {
+            return '0:01';
+        }
+        if (isNaN(audioRef.current.duration)) {
+            return '0:00';
+        }
         let seconds = parseInt(num);
         let minutes = parseInt(seconds / 60);
         seconds -= minutes * 60;
         const hours = parseInt(minutes / 60);
         minutes -= hours * 60;
-        console.log(num);
-        if (num >= 1) {
-            if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
-            return `${String(hours).padStart(2, 0)}:${minutes}:${String(
-              seconds % 60
-            ).padStart(2, 0)}`;
-        }
-        return "0:01";
-      }
+        if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+        return `${String(hours).padStart(2, 0)}:${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+    };
 
     useEffect(() => {
         if (audioRef.current != null) {
-            console.log(audioRef.current);
             setDurationTime(getTimeCodeFromNum(audioRef.current.duration));
         }
-    }, [audioRef.current])
+    }, [audioRef.current, isPlayAudio]);
 
-     
     const changeTimelinePosition = () => {
         if (audioRef.current != null && timelineRef.current != null) {
-            setCurrentTime(getTimeCodeFromNum(Math.floor((audioRef.current.currentTime))));
+            setCurrentTime(getTimeCodeFromNum(Math.floor(audioRef.current.currentTime)));
             const percentagePosition = (100 * audioRef.current.currentTime) / audioRef.current.duration;
             timelineRef.current.style.backgroundSize = `${percentagePosition}% 100%`;
             timelineRef.current.value = percentagePosition;
@@ -58,14 +55,11 @@ export const Message = ({ children, type, image, typeMessage }) => {
 
     const changeSeek = () => {
         try {
-
             if (audioRef.current != null && timelineRef.current != null) {
                 const time = (timelineRef.current.value * audioRef.current.duration) / 100;
                 audioRef.current.currentTime = time;
             }
-        } catch (e) {
-
-        }
+        } catch (e) {}
     };
 
     return (
@@ -92,7 +86,7 @@ export const Message = ({ children, type, image, typeMessage }) => {
                         />
                         <FontAwesomeIcon
                             onClick={() => {
-                                if (isStartAudio === true) setCurrentTime("0:00");
+                                if (isStartAudio === true) setCurrentTime('0:00');
                                 setIsStartAudio(false);
                                 audioRef.current.play();
                                 setIsPlayAudio((prev) => !prev);
@@ -118,7 +112,10 @@ export const Message = ({ children, type, image, typeMessage }) => {
                             onTimeUpdate={changeTimelinePosition}
                             ref={audioRef}
                             src={`${children}`}
-                            onEnded={() => {setIsStartAudio(true); setIsPlayAudio(false)}}
+                            onEnded={() => {
+                                setIsStartAudio(true);
+                                setIsPlayAudio(false);
+                            }}
                             className="message-content-audio"
                         >
                             <source src={children} alt="message" type="audio/mpeg"></source>
