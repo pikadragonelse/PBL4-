@@ -1,6 +1,5 @@
 import {
     faFaceSmile,
-    faImage,
     faMicrophone,
     faPaperclip,
     faPaperPlane,
@@ -48,6 +47,7 @@ export const MessageBox = forwardRef(({ handleSendMessage }, inputRefParent) => 
     const sendSpecialMessage = (file) => {
         let reader = new FileReader();
         try {
+            console.log(file);
             if (
                 file.type &&
                 !file.type.startsWith('image/') &&
@@ -71,9 +71,12 @@ export const MessageBox = forwardRef(({ handleSendMessage }, inputRefParent) => 
     };
 
     const handleSelectMethodSendMessage = () => {
-        if (checkTypeMessage() === 0) { sendTextMessage(); }
-        else { sendSpecialMessage(fileRef.current.files[0])}
-    }
+        if (checkTypeMessage() === 0) {
+            sendTextMessage();
+        } else {
+            sendSpecialMessage(fileRef.current.files[0]);
+        }
+    };
 
     useImperativeHandle(
         inputRefParent,
@@ -81,9 +84,6 @@ export const MessageBox = forwardRef(({ handleSendMessage }, inputRefParent) => 
             return {
                 reset() {
                     inputRef.current.value = '';
-                },
-                sendMessage() {
-                    handleSelectMethodSendMessage();
                 },
             };
         },
@@ -149,14 +149,24 @@ export const MessageBox = forwardRef(({ handleSendMessage }, inputRefParent) => 
                     <div
                         className={`message-box-image-container ${isShowImageInput === true ? 'show-image-input' : ''}`}
                     >
-                        <img ref={imgRef} className="message-box-image-input" src="#" alt="your image" />
+                        <img ref={imgRef} className="message-box-image-input" src="#" alt="your" />
                         <FontAwesomeIcon
                             onClick={() => setIsShowImageInput(false)}
                             icon={faTimes}
                             className="message-box-input-image-icon"
                         />
                     </div>
-                    <input ref={inputRef} placeholder="Type message" type="text" className="message-box-input" />
+                    <input
+                        onKeyDown={(event) => {
+                            if (event.keyCode === 13) {
+                                handleSelectMethodSendMessage();
+                            }
+                        }}
+                        ref={inputRef}
+                        placeholder="Type message"
+                        type="text"
+                        className="message-box-input"
+                    />
                 </div>
                 <FontAwesomeIcon className="message-box-icon message-box-method-icon" icon={faFaceSmile} />
             </div>

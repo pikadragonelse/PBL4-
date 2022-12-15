@@ -12,6 +12,7 @@ export const ListMessage = ({ listGroup, sendToBroker }) => {
         try {
             if (tempRef.current === 0) {
                 setIdGroupActive(listGroup[0].idGroup);
+                sendToBroker("default", listGroup[0].idGroup);
                 tempRef.current++;
             }
         } catch (Error) {

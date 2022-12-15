@@ -1,5 +1,4 @@
-import React, { forwardRef, useEffect, useImperativeHandle } from 'react'
-import { useState } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

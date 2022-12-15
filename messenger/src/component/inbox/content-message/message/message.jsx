@@ -2,6 +2,7 @@ import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 
 import './message.css';
@@ -14,26 +15,38 @@ const messageContentSubClassMap = {
 
 export const Message = ({ children, type, image, typeMessage }) => {
     const [isPlayAudio, setIsPlayAudio] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
+    const [currentTime, setCurrentTime] = useState("0:00");
+    const [durationTime, setDurationTime] = useState("0:00");
+    const [isStartAudio, setIsStartAudio] = useState(true);
 
     const audioRef = useRef(null);
     const timelineRef = useRef(null);
 
     const getTimeCodeFromNum = (num) => {
+
         let seconds = parseInt(num);
         let minutes = parseInt(seconds / 60);
         seconds -= minutes * 60;
         const hours = parseInt(minutes / 60);
         minutes -= hours * 60;
-      
-        if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
-        return `${String(hours).padStart(2, 0)}:${minutes}:${String(
-          seconds % 60
-        ).padStart(2, 0)}`;
+        console.log(num);
+        if (num >= 1) {
+            if (hours === 0) return `${minutes}:${String(seconds % 60).padStart(2, 0)}`;
+            return `${String(hours).padStart(2, 0)}:${minutes}:${String(
+              seconds % 60
+            ).padStart(2, 0)}`;
+        }
+        return "0:01";
       }
 
-    let durationTime = audioRef.current != null ? getTimeCodeFromNum(audioRef.current.duration) : 0;
+    useEffect(() => {
+        if (audioRef.current != null) {
+            console.log(audioRef.current);
+            setDurationTime(getTimeCodeFromNum(audioRef.current.duration));
+        }
+    }, [audioRef.current])
 
+     
     const changeTimelinePosition = () => {
         if (audioRef.current != null && timelineRef.current != null) {
             setCurrentTime(getTimeCodeFromNum(Math.floor((audioRef.current.currentTime))));
@@ -44,9 +57,14 @@ export const Message = ({ children, type, image, typeMessage }) => {
     };
 
     const changeSeek = () => {
-        if (audioRef.current != null && timelineRef.current != null) {
-            const time = (timelineRef.current.value * audioRef.current.duration) / 100;
-            audioRef.current.currentTime = time;
+        try {
+
+            if (audioRef.current != null && timelineRef.current != null) {
+                const time = (timelineRef.current.value * audioRef.current.duration) / 100;
+                audioRef.current.currentTime = time;
+            }
+        } catch (e) {
+
         }
     };
 
@@ -74,6 +92,8 @@ export const Message = ({ children, type, image, typeMessage }) => {
                         />
                         <FontAwesomeIcon
                             onClick={() => {
+                                if (isStartAudio === true) setCurrentTime("0:00");
+                                setIsStartAudio(false);
                                 audioRef.current.play();
                                 setIsPlayAudio((prev) => !prev);
                             }}
@@ -88,7 +108,7 @@ export const Message = ({ children, type, image, typeMessage }) => {
                             type="range"
                             max="100"
                             min="0"
-                            class="message-content-audio-timeline"
+                            className="message-content-audio-timeline"
                         />
                         <span className="message-content-audio-timeline-duration">{`${currentTime}`}</span>
                         <span>/</span>
@@ -97,11 +117,13 @@ export const Message = ({ children, type, image, typeMessage }) => {
                         <audio
                             onTimeUpdate={changeTimelinePosition}
                             ref={audioRef}
-                            src={`data:audio/mp3;base64,${children}`}
-                            controls
-                            onEnded={() => setIsPlayAudio(false)}
+                            src={`${children}`}
+                            onEnded={() => {setIsStartAudio(true); setIsPlayAudio(false)}}
                             className="message-content-audio"
-                        />
+                        >
+                            <source src={children} alt="message" type="audio/mpeg"></source>
+                            <source src={children} type="audio/ogg"></source>
+                        </audio>
                     </>
                 ) : typeMessage === 3 ? (
                     <video className="message-content-vid" controls>
