@@ -1,6 +1,4 @@
 import { useNavigate } from 'react-router';
-import { Button } from '../../button/button';
-import { Input } from '../../input';
 import React, {useState} from 'react';
 
 import './login-content.css';

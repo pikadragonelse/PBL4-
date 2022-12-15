@@ -11,13 +11,13 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
     const [listGroup, setListGroup] = useState([]);
     const [listMessageOfGroup, setListMessageOfGroup] = useState([]);
     const [checkSendMessage, setCheckSendMessage] = useState(0);
-    const { newestMessage, messageCount, unSubscribe } = useSubscribe('default');
+    const { newestMessage } = useSubscribe('default');
 
     const inputRefParent = useRef(null);
     const contentMessageRefParent = useRef(null);
 
-    const getAllGroup = () => {
-        fetch(`http://localhost:8080/api/group/get-all-group`, {
+    const getAllGroup =   () => {
+          fetch(`http://localhost:8080/api/group/get-all-group`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,9 +50,9 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
         } catch (error) {}
     };
 
-    const sendMessage = (messageSended) => {
+    const sendMessage =  (messageSended) => {
         try {
-            fetch(`http://localhost:8080/api/message/send-message?idGroup=${newestMessage || listGroup[0].idGroup}`, {
+             fetch(`http://localhost:8080/api/message/send-message?idGroup=${newestMessage || listGroup[0].idGroup}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,8 +61,7 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
                 body: JSON.stringify(messageSended),
             })
                 .then(() => {
-                    console.log(messageSended);
-                    setCheckSendMessage((prev) => (prev = ++prev));
+                    setCheckSendMessage((prev) => (++prev));
                 })
                 .catch((error) => console.log(error));
         } catch (error) {
@@ -70,12 +69,14 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
         }
     };
 
+
     useEffect(() => {
         getAllGroup();
+        getAllMessages();
     }, [newestMessage]);
 
     useEffect(() => {
-        // getAllMessages();
+        getAllMessages();
 
         // const timer = setInterval(() => {
         //     contentMessageRefParent.current.setScroll();
@@ -87,15 +88,16 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
     }, [checkSendMessage, listGroup]);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            getAllMessages();
-        }, 1000);
-        return () => {
-            clearInterval(timer);
-        };
+        // const timer = setInterval(() => {
+        //     getAllMessages();
+        // }, 1000);
+        // return () => {
+        //     clearInterval(timer);
+        // };
     });
 
-    const handleSendMessage = (message) => {
+
+    const handleSendMessage =  (message) => {
         if (message.message !== '') {
             sendMessage(message);
             inputRefParent.current.reset();
@@ -104,11 +106,6 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
 
     return (
         <div
-            onKeyDown={(event) => {
-                if (event.keyCode === 13) {
-                    inputRefParent.current.sendMessage();
-                }
-            }}
             className="inbox-main"
         >
             <HeaderInbox />

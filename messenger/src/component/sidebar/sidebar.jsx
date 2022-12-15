@@ -10,7 +10,6 @@ import { FormAddFriend } from '../form-add-friend';
 import { useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import 'tippy.js/animations/perspective.css';
 
 import './sidebar.css';
 
@@ -54,11 +53,9 @@ export const Sidebar = () => {
                 </Link>
                 {iconSideBarIconMap.map((item) => (
                     <Tippy
+                        key={item.iconName}
                         content={nameTooltipMap[item.iconName]}
-                        interactive={true}
-                        theme='#6445E0'
-                        data-animation="perspective"
-                        interactiveBorder={30}
+                        interactive={true}   
                         placement="right"
                         duration={20}
                         className="sidebar-tippy"
@@ -67,7 +64,6 @@ export const Sidebar = () => {
                             onClick={() => {
                                 methodSidebarMap[item.iconName]();
                             }}
-                            key={item.icon}
                             icon={item}
                             className="sidebar-icon"
                         />
