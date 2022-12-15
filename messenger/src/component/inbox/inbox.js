@@ -1,8 +1,7 @@
 import React from 'react';
-import  { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ContentMessage } from './content-message';
 import { HeaderInbox } from './header-inbox';
-
 
 import './inbox.css';
 import { MessageBox } from './message-box';
@@ -11,13 +10,13 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
     const [listGroup, setListGroup] = useState([]);
     const [listMessageOfGroup, setListMessageOfGroup] = useState([]);
     const [checkSendMessage, setCheckSendMessage] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
     const { newestMessage } = useSubscribe('default');
 
-    const inputRefParent = useRef(null);
     const contentMessageRefParent = useRef(null);
 
-    const getAllGroup =   () => {
-          fetch(`http://localhost:8080/api/group/get-all-group`, {
+    const getAllGroup = () => {
+        fetch(`http://localhost:8080/api/group/get-all-group`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,15 +43,16 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
             })
                 .then((res) => res.json())
                 .then((data) => {
+                    setIsLoading(false);
                     setListMessageOfGroup(data);
                 })
                 .catch((error) => console.log(error));
         } catch (error) {}
     };
 
-    const sendMessage =  (messageSended) => {
+    const sendMessage = (messageSended) => {
         try {
-             fetch(`http://localhost:8080/api/message/send-message?idGroup=${newestMessage || listGroup[0].idGroup}`, {
+            fetch(`http://localhost:8080/api/message/send-message?idGroup=${newestMessage || listGroup[0].idGroup}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,14 +61,13 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
                 body: JSON.stringify(messageSended),
             })
                 .then(() => {
-                    setCheckSendMessage((prev) => (++prev));
+                    setCheckSendMessage((prev) => ++prev);
                 })
                 .catch((error) => console.log(error));
         } catch (error) {
             console.log(error);
         }
     };
-
 
     useEffect(() => {
         getAllGroup();
@@ -96,21 +95,22 @@ export const Inbox = ({ user, useSubscribe, sendToBroker }) => {
         // };
     });
 
-
-    const handleSendMessage =  (message) => {
+    const handleSendMessage = (message) => {
         if (message.message !== '') {
             sendMessage(message);
-            inputRefParent.current.reset();
         }
     };
 
     return (
-        <div
-            className="inbox-main"
-        >
+        <div className="inbox-main">
             <HeaderInbox />
-            <ContentMessage ref={contentMessageRefParent} idUser={user.id} listMessage={listMessageOfGroup} />
-            <MessageBox ref={inputRefParent} handleSendMessage={handleSendMessage}  />
+            <ContentMessage
+                ref={contentMessageRefParent}
+                isLoading={isLoading}
+                idUser={user.id}
+                listMessage={listMessageOfGroup}
+            />
+            <MessageBox handleSendMessage={handleSendMessage} />
         </div>
     );
 };
