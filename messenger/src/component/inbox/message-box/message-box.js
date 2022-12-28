@@ -8,7 +8,7 @@ import './message-box.css';
 import { useRecorder } from '../../../hooks/useRecorder';
 import { MessageBoxInput } from './message-box-input';
 
-export const MessageBox = ({ handleSendMessage }) => {
+export const MessageBox = ({ handleSendMessage, isDoneSend }) => {
     const fileRef = useRef(null);
     const [isShowImageInput, setIsShowImageInput] = useState(false);
     const [isOpenRecordInput, setIsOpenRecordInput] = useState(false);
@@ -81,6 +81,7 @@ export const MessageBox = ({ handleSendMessage }) => {
             </div>
 
             <MessageBoxInput
+                isDoneSend={isDoneSend}
                 isOpenRecordInput={isOpenRecordInput}
                 setIsShowImageInput={setIsShowImageInput}
                 isShowImageInput={isShowImageInput}

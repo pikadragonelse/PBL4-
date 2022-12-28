@@ -11,6 +11,7 @@ export const Inbox = ({ user, useSubscribe }) => {
     const [checkSendMessage, setCheckSendMessage] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const { newestMessage } = useSubscribe('default');
+    const [isDoneSend, setIsDoneSend] = useState(false);
 
     const contentMessageRefParent = useRef(null);
 
@@ -48,6 +49,7 @@ export const Inbox = ({ user, useSubscribe }) => {
                     body: JSON.stringify(messageSended),
                 })
                     .then(() => {
+                        setIsDoneSend((prev) => (prev = !prev));
                         setCheckSendMessage((prev) => ++prev);
                     })
                     .catch((error) => console.log(error));
@@ -91,7 +93,7 @@ export const Inbox = ({ user, useSubscribe }) => {
                 idUser={user.id}
                 listMessage={listMessageOfGroup}
             />
-            <MessageBox handleSendMessage={handleSendMessage} />
+            <MessageBox isDoneSend={isDoneSend} handleSendMessage={handleSendMessage} />
         </div>
     );
 };

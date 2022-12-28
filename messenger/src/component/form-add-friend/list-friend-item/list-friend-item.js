@@ -28,22 +28,8 @@ export const ListFriendItem = ({
     const [listRequest, setListRequest] = useState([]);
     const [resetState, setResetState] = useState(false);
 
-    useEffect(() => {
-        getAllMyFriendRequest();
-    }, [resetState]);
-
-    const checkIsRequest = () => {
-        return listRequest.some((item) => item.idFriend === friend.idFriend);
-    };
-
-    const checkIsFriend = () => {
-        if (listFriend != null) {
-            return listFriend.some((item) => item.idFriend === friend.idFriend);
-        }
-    };
-
     const getAllMyFriendRequest = () => {
-        fetch(`http://localhost:8080/api/friend/get-all-friend-request`, {
+        fetch(`http://localhost:8080/api/friend/get-all-my-friend-request`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -59,6 +45,20 @@ export const ListFriendItem = ({
             });
     };
 
+    useEffect(() => {
+        getAllMyFriendRequest();
+    }, [resetState]);
+
+    const checkIsRequest = () => {
+        return listRequest.some((item) => item.idFriend === friend.idFriend);
+    };
+
+    const checkIsFriend = () => {
+        if (listFriend != null) {
+            return listFriend.some((item) => item.idFriend === friend.idFriend);
+        }
+    };
+
     const sendRequestAddFriend = (isRequest) => {
         fetch(
             `http://localhost:8080/api/friend/send-friend-request?idFriend=${friend.idFriend}&request=${!isRequest}`,
@@ -70,7 +70,10 @@ export const ListFriendItem = ({
                 },
             },
         )
-            .then(() => setResetState((prev) => (prev = !prev)))
+            .then(() => {
+                console.log(isRequest);
+                setResetState((prev) => (prev = !prev));
+            })
             .catch((error) => {
                 console.log(error);
             });
@@ -95,7 +98,9 @@ export const ListFriendItem = ({
             onClick={() => {
                 setIsOpenDrawer(true);
                 setIdUserGetInfo(friend.idFriend);
-                setIsOpenModal(false);
+                try {
+                    setIsOpenModal(false);
+                } catch (error) {}
             }}
             className="list-friend-item"
         >
@@ -127,7 +132,14 @@ export const ListFriendItem = ({
                 ) : type === 'addFriend' || type === 'showAllFriend' ? (
                     <Button
                         primary
-                        onClick={() => sendRequestAddFriend(checkIsRequest())}
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            if (listRequest[0] != null) {
+                                sendRequestAddFriend(checkIsRequest());
+                            } else {
+                                sendRequestAddFriend(false);
+                            }
+                        }}
                         typeDecor={checkIsRequest() === true || checkIsFriend() === true ? 'cancel' : ''}
                         size="small"
                     >
@@ -149,7 +161,8 @@ export const ListFriendItem = ({
                         <Button
                             size="small"
                             typeDecor="cancel"
-                            onClick={() => {
+                            onClick={(e) => {
+                                e.stopPropagation();
                                 setIsAccept((prev) => (prev = !prev));
                                 acceptFriend(false);
                             }}

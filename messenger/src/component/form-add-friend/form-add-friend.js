@@ -40,7 +40,7 @@ export const FormAddFriend = ({
     const listFriendMap = {
         addFriendToGroup: listFriend,
         addFriend: listFriendRecommend,
-        showAllFriend: listFriend,
+        showAllFriend: listFriendUserInfo,
     };
 
     const getAllFriend = () => {

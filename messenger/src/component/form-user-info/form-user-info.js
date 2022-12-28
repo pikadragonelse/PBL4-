@@ -17,7 +17,7 @@ const blockInfoSubMap = {
     Contact: blockInfoContactItemMap,
 };
 
-export const FormUserInfo = ({ user, idUserGetInfo, isOpen }) => {
+export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, setIdUserGetInfo }) => {
     const [userInfo, setUserInfo] = useState({});
     const [userInfoMap, setUserInfoMap] = useState({});
     const [listFriend, setListFriend] = useState([]);
@@ -33,7 +33,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen }) => {
     };
 
     const getAllFriend = () => {
-        fetch('http://localhost:8080/api/friend/get-all-friend', {
+        fetch(`http://localhost:8080/api/friend/get-all-friend?idUser=${idUserGetInfo}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -48,10 +48,6 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen }) => {
                 console.log(error);
             });
     };
-
-    useEffect(() => {
-        getAllFriend();
-    }, []);
 
     const getInfoUser = () => {
         fetch(`http://localhost:8080/api/user/get-info-user?idUser=${idUserGetInfo}`, {
@@ -81,10 +77,10 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen }) => {
 
     useEffect(() => {
         if (idUserGetInfo != null) {
+            setListFriend([]);
             getInfoUser();
+            getAllFriend();
         }
-        console.log(user.id);
-        console.log(idUserGetInfo);
     }, [idUserGetInfo]);
 
     return (
@@ -114,6 +110,8 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen }) => {
                         type="showAllFriend"
                         className="form-user-info-list-friend"
                         listFriendUserInfo={listFriend}
+                        setIsOpenDrawer={setIsOpenDrawer}
+                        setIdUserGetInfo={setIdUserGetInfo}
                     />
                 </div>
                 <div className="form-user-info-personal">

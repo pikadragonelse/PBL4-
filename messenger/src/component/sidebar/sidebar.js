@@ -10,17 +10,13 @@ import { FormAddFriend } from '../form-add-friend';
 import { useState } from 'react';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-import { Drawer } from '../drawer/drawer';
 
 import './sidebar.css';
-import { FormUserInfo } from '../form-user-info';
 import { FormFriendRequest } from '../form-friend-request';
 
 const iconSideBarIconMap = [faComments, faCircleUser, faPhoneVolume, faUserPlus];
-export const Sidebar = ({ user }) => {
+export const Sidebar = ({ user, setIdUserGetInfo, setIsOpenDrawer }) => {
     const [isOpenModal, setIsOpenModal] = useState(false);
-    const [isOpenDrawer, setIsOpenDrawer] = useState(false);
-    const [idUserGetInfo, setIdUserGetInfo] = useState(undefined);
     const [isOpenRequestList, setIsOpenRequestList] = useState(false);
 
     const methodSidebarMap = {
@@ -52,7 +48,7 @@ export const Sidebar = ({ user }) => {
                 <Modal
                     isOpenModalRequest={isOpenRequestList}
                     setIsOpenModalRequest={setIsOpenRequestList}
-                    content={<FormFriendRequest user={user} />}
+                    content={<FormFriendRequest setIsOpenDrawer={setIsOpenDrawer} user={user} />}
                     title="Friend request"
                     type="add-friend"
                 />
@@ -72,9 +68,7 @@ export const Sidebar = ({ user }) => {
                     type="add-friend"
                     title="Add friend"
                 />
-                <Drawer isOpen={isOpenDrawer} setIsOpen={setIsOpenDrawer}>
-                    <FormUserInfo user={user} isOpen={isOpenDrawer} idUserGetInfo={idUserGetInfo} />
-                </Drawer>
+
                 <Link to="/" className="sidebar-logo">
                     <Logo type="logo-sidebar" />
                 </Link>

@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 
 import './list-message.css';
 
-export const ListMessage = ({ listGroup, sendToBroker }) => {
+export const ListMessage = ({ listGroup, sendToBroker, setResetState }) => {
     const [idGroupActive, setIdGroupActive] = React.useState(undefined);
     const [lastMessage, setLastMessage] = React.useState('');
     const [hasUnreadMessage, setHasUnreadMessage] = React.useState(false);

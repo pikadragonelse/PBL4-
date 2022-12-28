@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 
 const initialData = {
     idGroup: 0,
@@ -35,13 +36,13 @@ export const createBroker = () => {
             const unSubscribe = () => {
                 delete channelMap[channelName].subscribeMap[subscribeId];
             };
-
             React.useEffect(() => {
                 channelMap[channelName].subscribeMap[subscribeId] = (payload) => {
                     setMessageCount((cur) => cur + 1);
                     setNewestMessage(payload);
                 };
             }, []);
+
             return {
                 newestMessage,
                 messageCount,

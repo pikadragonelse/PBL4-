@@ -9,7 +9,7 @@ import './friend-box.css';
 import { Modal } from '../modal';
 import { FormAddFriend } from '../form-add-friend';
 
-export const FriendBox = ({ user, sendToBroker }) => {
+export const FriendBox = ({ user, sendToBroker, setIsOpenDrawer, setIdUserGetInfo }) => {
     const listMessageContainerRef = useRef();
     const [isLoading, setIsLoading] = useState(true);
     const [isMask, setIsMask] = useState(false);
@@ -79,7 +79,9 @@ export const FriendBox = ({ user, sendToBroker }) => {
                         setIsOpen={setIsOpenModalAddFriendToGroup}
                         isOpen={isOpenModalAddFriendToGroup}
                         user={user}
+                        setIsOpenDrawer={setIsOpenDrawer}
                         type="addFriendToGroup"
+                        setIdUserGetInfo={setIdUserGetInfo}
                     />
                 }
                 isOpenModalRequest={isOpenModalAddFriendToGroup}

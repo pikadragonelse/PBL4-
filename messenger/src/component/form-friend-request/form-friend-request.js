@@ -4,7 +4,7 @@ import { ListFriendItem } from '../form-add-friend/list-friend-item';
 
 import './form-friend-request.css';
 
-export const FormFriendRequest = ({ user }) => {
+export const FormFriendRequest = ({ user, setIsOpenDrawer }) => {
     const [listRequest, setListRequest] = useState([]);
     const [isAccept, setIsAccept] = useState(false);
     const getAllMyFriendRequest = () => {
@@ -39,6 +39,7 @@ export const FormFriendRequest = ({ user }) => {
                     avatar={`${process.env.PUBLIC_URL}/avatar.jpg`}
                     user={user}
                     setIsAccept={setIsAccept}
+                    setIsOpenDrawer={setIsOpenDrawer}
                 />
             ))}
         </div>
