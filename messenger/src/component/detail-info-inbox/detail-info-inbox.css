@@ -25,6 +25,11 @@
 
 .detail-info-inbox-nickname {
     font-size: var(--font-md);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    max-width: 200px;
     margin: 0;
 }
 

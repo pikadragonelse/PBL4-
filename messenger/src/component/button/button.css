@@ -6,6 +6,10 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
     background-color: var(--sub-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
 }
 
 .button-app:hover {
@@ -17,6 +21,35 @@
     color: var(--main-color);
 }
 
-.button-primary:hover { 
+.button-primary:hover {
     background-color: var(--primary-sub-color);
 }
+
+.button-app.small {
+    min-width: 100px;
+    font-size: var(--font-vr-sm);
+}
+
+.button-cancel {
+    background-color: var(--contrast-light-color);
+}
+
+.button-cancel:hover {
+    background-color: var(--contrast-color);
+}
+
+.button-cancel-icon {
+    --size-icon: 15px;
+    width: var(--size-icon);
+    height: var(--size-icon);
+    display: none;
+}
+
+.button-cancel .button-cancel-icon {
+    display: block;
+}
+
+
+
+
+

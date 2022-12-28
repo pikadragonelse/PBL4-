@@ -20,4 +20,12 @@
     border-radius: none;
 }
 
+.error-input {
+    border: 1px solid var(--error-color);
+}
+
+.error-input:focus {
+    border: 1px solid var(--error-color);
+}
+
 

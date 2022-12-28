@@ -12,11 +12,12 @@ export const ListMessageItem = ({
     isActive,
     setIdGroupActive,
     typeMessage,
+    groupName,
+    hasUnreadMessage,
 }) => {
     let timeSend = new Date(timeMessage);
     let timeNow = Date.now();
     let distanceTime = timeNow - timeSend.getTime();
-    let distanceTimeYears = Math.ceil(distanceTime / (1000 * 3600 * 24 * 7 * 30 * 365));
     let distanceTimeMonths = Math.ceil(distanceTime / (1000 * 3600 * 24 * 7 * 30));
     let distanceTimeWeeks = Math.ceil(distanceTime / (1000 * 3600 * 24 * 7));
     let distanceTimeDays = Math.ceil(distanceTime / (1000 * 3600 * 24));
@@ -35,10 +36,7 @@ export const ListMessageItem = ({
         stringTimeShow = `${distanceTimeWeeks} weeks ago`;
     } else if (distanceTimeMonths <= 11) {
         stringTimeShow = `${distanceTimeWeeks} months ago`;
-    } else if (distanceTimeYears <= 5) {
-        stringTimeShow = `${distanceTimeYears} years ago`;
     }
-
     const lastMessageMap = {
         0: lastMessage,
         1: 'Sent a image',
@@ -49,16 +47,18 @@ export const ListMessageItem = ({
     return (
         <li
             onClick={() => {
-                sendToBroker('default', idGroup);
+                sendToBroker('default', { idGroup: idGroup, lastMessage: lastMessage });
+                sendToBroker('userInfoMain', { username: groupName });
+                sendToBroker('userInfoSub', { username: groupName });
                 setIdGroupActive(idGroup);
             }}
-            className={`list-message-friend-message ${isActive}`}
+            className={`list-message-friend-message ${isActive} ${hasUnreadMessage}`}
         >
             <div className="list-message-friend-avt-container">
                 <Avatar src={process.env.PUBLIC_URL + '/avatar.jpg'} />
             </div>
             <div className="list-message-friend-info">
-                <h4 className="list-message-friend-nickname">{nameSender}</h4>
+                <h4 className="list-message-friend-nickname">{groupName}</h4>
                 <p className="list-message-friend-content">{lastMessageMap[typeMessage]}</p>
             </div>
             <p className="list-message-message-time">{stringTimeShow}</p>

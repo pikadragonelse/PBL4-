@@ -7,14 +7,15 @@ import { Avatar } from '../avatar';
 import './detail-info-inbox.css';
 import { Feature } from './feature';
 
-export const DetailInfoInbox = () => {
+export const DetailInfoInbox = ({ useSubscribe }) => {
+    const { newestMessage } = useSubscribe('userInfoMain');
     return (
         <div className="detail-info-inbox">
             <div className="detail-info-inbox-container-avt">
                 <Avatar src={process.env.PUBLIC_URL + '/avatar.jpg'} />
             </div>
             <div className="detail-info-inbox-header">
-                <h3 className="detail-info-inbox-nickname">Long</h3>
+                <h3 className="detail-info-inbox-nickname">{newestMessage.username}</h3>
                 <p className="detail-info-inbox-alive">Online</p>
             </div>
 

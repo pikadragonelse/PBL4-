@@ -1,4 +1,13 @@
-
+.form-add-friend-list-friend-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);    
+    margin-bottom: var(--spacing-sm);
+    min-height: var(--spacing-md);
+    flex-wrap: wrap;
+    overflow-y: auto;
+    max-height: 50px;
+}
 
 .form-add-friend-search-container {
     width: 100%;
@@ -13,11 +22,14 @@
     width: 100%;
     flex-direction: column;
     align-items: center;
-    height: 500px;
-    max-height: 500px;
+    height: 400px;
+    max-height: 400px;
     font-size: var(--font-sm);
     gap: var(--spacing-sm);
     overflow: auto;
+    border-top: 2px solid var(--sub-color);
+    border-bottom: 2px solid var(--sub-color);
+
 }
 
 .list-friend-recommend::-webkit-scrollbar-track
@@ -36,4 +48,11 @@
 	background-color: var(--contrast-color);
     cursor: pointer;
 }
+
+.form-add-friend-button {
+    display: flex;
+    flex-direction:  row-reverse;
+    margin-top: var(--spacing-sm);
+}
+
 

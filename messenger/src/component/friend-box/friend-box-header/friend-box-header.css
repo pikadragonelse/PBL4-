@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: var(--spacing-md);
     font-size: var(--font-sm);
+    position: relative;
 }
 
 .friend-box-header-type {
@@ -36,4 +37,25 @@
 
 .friend-box-header-search-container {
     margin: 0 var(--spacing-md);
+}
+
+.friend-box-icon-edit-group {
+    --size-icon: 20px;
+    width: var(--size-icon);
+    height: var(--size-icon);
+    align-self: flex-end;
+    margin-right: var(--spacing-md);
+    margin-bottom: calc(-1 * var(--spacing-sm));
+    cursor: pointer;
+    transition: color 0.05s ease-in-out;
+    padding: var(--spacing-vr-sm);
+    display: none;
+}
+
+.friend-box-icon-edit-group:hover {
+    color: var(--primary-color);
+}
+
+.friend-box-icon-edit-group.show-icon-edit {
+    display: block;
 }

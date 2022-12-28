@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { MessengerPage } from './page/messenger-page';
 import { LoginPage } from './page/login-page';
 
-const App = () => {
+export const App = () => {
     return (
         <Routes>
             <Route path="/" element={<LoginPage />} />
@@ -12,5 +12,3 @@ const App = () => {
         </Routes>
     );
 };
-
-export default App;

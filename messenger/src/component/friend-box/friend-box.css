@@ -5,6 +5,7 @@
     background-color: var(--sub-color); 
     overflow: hidden;
     height: 100%;
+    position: relative;
 }
 
 .list-message-container {

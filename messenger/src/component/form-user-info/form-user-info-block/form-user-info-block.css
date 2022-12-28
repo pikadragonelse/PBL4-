@@ -1,0 +1,21 @@
+.form-user-info-block {
+    display: flex;
+    width: 100%;
+    gap: var(--spacing-sm);
+    flex-direction: column;
+    background-color: var(--sub-color);
+    padding: var(--spacing-l-sm);
+    border-radius: var(--b-radius-md);
+}
+
+.form-user-info-block-title {
+    margin: 0;
+    font-size: var(--font-sm);
+}
+
+.form-user-info-block-content {
+    font-size: var(--font-vr-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}

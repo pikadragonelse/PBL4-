@@ -8,12 +8,13 @@
   --sub-color: #e3e3e3;
   --sub-light-color: #eeecec;
   --contrast-color: #353535;
-  --contrast-light-color: #3b3b3b;
+  --contrast-light-color: #4e4e4e;
   --contrast-transparent-color: #3535359a;
   --sub-contrast-color: #f1f1f1;
   --primary-color: #6445E0;
   --primary-sub-color: #7350ff;
   --light-transparent-color: rgba(246, 246, 246, 0.46);
+  --error-color: rgb(255, 50, 50);
 
   /* spacing */
   --spacing-vr-sm: 5px;

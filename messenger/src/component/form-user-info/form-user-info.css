@@ -1,0 +1,91 @@
+.form-user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    font-size: var(--font-sm);
+    width: 100%;
+    padding-top: var(--spacing-lg);
+    margin-right: var(--spacing-sm);
+}
+
+.form-user-info-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.form-user-info-avt-container {
+    --size-avt: 100px;
+    width: var(--size-avt);
+    height: var(--size-avt);
+}
+
+.form-user-info-header-info {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-user-info-nickname {
+    margin: 0;
+    font-weight: 500;
+}
+
+.form-user-info-hometown {
+    font-size: var(--font-vr-sm);
+    margin: 0;
+    padding: 0;
+}
+
+.form-user-info-button {
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.form-user-info-body {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.form-user-info-list-friend-container {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-user-info-list-friend {
+    background-color: var(--sub-color);
+    padding: var(--spacing-l-sm);
+    border-radius: var(--b-radius-md);
+}
+
+.form-user-info-list-friend-title {
+    font-size: var(--font-sm);
+    margin: auto;
+    margin-bottom: var(--spacing-sm);
+    align-items: center;
+}
+
+.form-user-info-personal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    flex: 1;
+}
+
+.form-user-info-personal-title {
+    font-size: var(--font-sm);
+    margin: 0;
+}
+
+.form-user-info-favorite-container {
+    display: flex;
+    gap: var(--spacing-sm);
+    max-height: 100%;
+    overflow: auto;
+    flex-wrap: wrap;
+}
+
+
