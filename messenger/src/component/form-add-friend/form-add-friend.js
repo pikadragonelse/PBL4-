@@ -32,6 +32,7 @@ export const FormAddFriend = ({
     isSearch,
     setIsSearch,
     searchTxt,
+    listFriendUser,
 }) => {
     const [listFriend, setListFriend] = useState([]);
     const [listFriendRecommend, setListFriendRecommend] = useState([]);
@@ -198,6 +199,7 @@ export const FormAddFriend = ({
                               listFriend={listFriendUserInfo}
                               mutualFriends={item.mutualFriends}
                               setIsReloadListFriend={setIsReloadListFriend}
+                              listFriendUser={listFriendUser}
                           />
                       ))
                     : ''}
