@@ -25,6 +25,7 @@ export const ListFriendItem = ({
     setIsAccept,
     listFriend,
     mutualFriends,
+    setIsReloadListFriend,
 }) => {
     const [listRequest, setListRequest] = useState([]);
     const [resetState, setResetState] = useState(false);
@@ -101,7 +102,10 @@ export const ListFriendItem = ({
                 Authorization: `${user.type} ${user.token}`,
             },
         })
-            .then(() => setResetState((prev) => (prev = !prev)))
+            .then(() => {
+                setIsReloadListFriend((prev) => (prev = !prev));
+                setResetState((prev) => (prev = !prev));
+            })
             .catch((error) => {
                 console.log(error);
             });

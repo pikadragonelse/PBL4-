@@ -67,6 +67,8 @@ export const Sidebar = ({ user, setIdUserGetInfo, setIsOpenDrawer }) => {
                 <Modal
                     isOpenModalRequest={isOpenModal}
                     setIsOpenModalRequest={setIsOpenModal}
+                    setSearchTxt={setSearchTxt}
+                    setIsSearch={setIsSearch}
                     content={
                         <FormAddFriend
                             setIsOpenDrawer={setIsOpenDrawer}
@@ -75,6 +77,9 @@ export const Sidebar = ({ user, setIdUserGetInfo, setIsOpenDrawer }) => {
                             setIsOpen={setIsOpenModal}
                             user={user}
                             setIdUserGetInfo={setIdUserGetInfo}
+                            isSearch={isSearch}
+                            setIsSearch={setIsSearch}
+                            searchTxt={searchTxt}
                         />
                     }
                     type="add-friend"
