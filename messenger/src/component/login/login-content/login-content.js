@@ -14,6 +14,7 @@ export const LoginContent = () => {
     const [errorState, setErrorState] = useState(false);
     const [successState, setSuccessState] = useState(false);
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const [isOpenErrorLogin, setIsOpenErrorLogin] = useState(false);
 
     const loginHandle = (event, form) => {
         event.preventDefault();
@@ -33,7 +34,12 @@ export const LoginContent = () => {
             .then((data) => {
                 if (data.status !== 401) {
                     navigate(`/messenger-page/${data.id}`, { state: data });
+                } else {
+                    setIsOpenErrorLogin(true);
                 }
+            })
+            .catch(() => {
+                setIsOpenErrorLogin(true);
             });
     };
 
@@ -105,10 +111,24 @@ export const LoginContent = () => {
                 setIsOpenModalRequest={setIsOpenModal}
             />
 
+            <Modal
+                content={
+                    <FormNoti
+                        content={'Incorrect username or password, please check again!'}
+                        setIsOpenModal={setIsOpenErrorLogin}
+                    />
+                }
+                title="Error"
+                type="notification"
+                isOpenModalRequest={isOpenErrorLogin}
+                setIsOpenModalRequest={setIsOpenErrorLogin}
+            />
+
             <FormLogin
                 isHidden={isHiddenLoginForm}
                 loginHandle={loginHandle}
                 handleShowSignInForm={handleShowSignInForm}
+                setIsOpenErrorLogin={setIsOpenErrorLogin}
             />
 
             <div className={`login-image-container ${isHiddenSignInForm === false ? 'show-sign-in-form' : ''}`}>
