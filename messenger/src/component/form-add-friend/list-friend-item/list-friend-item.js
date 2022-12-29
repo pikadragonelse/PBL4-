@@ -53,7 +53,7 @@ export const ListFriendItem = ({
     }, [resetState]);
 
     const checkIsRequest = () => {
-        return listRequest.some((item) => item.idFriend === friend.idFriend);
+        return listRequest.some((item) => item.idFriend === friend.idFriend || item.idFriend === friend.idUser);
     };
 
     const checkIsFriend = () => {
@@ -64,7 +64,9 @@ export const ListFriendItem = ({
 
     const sendRequestAddFriend = (isRequest) => {
         fetch(
-            `http://localhost:8080/api/friend/send-friend-request?idFriend=${friend.idFriend}&request=${!isRequest}`,
+            `http://localhost:8080/api/friend/send-friend-request?idFriend=${
+                friend.idFriend || friend.idUser
+            }&request=${!isRequest}`,
             {
                 method: 'GET',
                 headers: {
@@ -130,7 +132,7 @@ export const ListFriendItem = ({
                 <div className="list-friend-item-container-text">
                     <h2 className="list-friend-item-name">{nameUser}</h2>
                     <p className="list-friend-item-text">
-                        {mutualFriends !== 0 ? `Mutual friends: ${mutualFriends}` : ''}
+                        {mutualFriends !== 0 && mutualFriends != null ? `Mutual friends: ${mutualFriends}` : ''}
                     </p>
                 </div>
             </div>
