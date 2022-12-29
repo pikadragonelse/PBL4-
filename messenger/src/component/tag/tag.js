@@ -4,11 +4,28 @@ import React from 'react';
 
 import './tag.css';
 
-export const Tag = ({ children, onClick, type }) => {
+export const Tag = ({ children, onClick, type, addToListFavoriteUser, removeFromListFavorite }) => {
     return (
-        <div className={`tag ${type}`}>
+        <div
+            onClick={() => {
+                if (type === 'choiceFavoriteTag') {
+                    addToListFavoriteUser(children);
+                }
+            }}
+            className={`tag ${type}`}
+        >
             <p className="tag-content">{children}</p>
-            {type !== 'favoriteTag' ? <FontAwesomeIcon onClick={onClick} icon={faTimes} className="tag-icon" /> : ''}
+            {type !== 'favoriteTag' && type !== 'choiceFavoriteTag' ? (
+                <FontAwesomeIcon
+                    onClick={() => {
+                        onClick || removeFromListFavorite(children);
+                    }}
+                    icon={faTimes}
+                    className="tag-icon"
+                />
+            ) : (
+                ''
+            )}
         </div>
     );
 };

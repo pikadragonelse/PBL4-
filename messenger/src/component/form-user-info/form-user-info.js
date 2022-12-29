@@ -25,7 +25,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
     const filterFavorite = (listFavoritesMap) => {
         let listFavorites = [];
         Object.keys(listFavoritesMap).forEach((item) => {
-            if (listFavoritesMap[item] > 2.5 && item !== 'idUserFavorite') {
+            if (listFavoritesMap[item] !== 2.5 && item !== 'idUserFavorite') {
                 listFavorites.push(item.replace('_', ' '));
             }
         });

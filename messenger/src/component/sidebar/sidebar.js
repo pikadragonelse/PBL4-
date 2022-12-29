@@ -1,5 +1,5 @@
 import { faComments, faCircleUser } from '@fortawesome/free-regular-svg-icons';
-import { faPhoneVolume, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHeartCirclePlus, faPhoneVolume, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Avatar } from '../avatar';
 import { Logo } from '../logo';
@@ -13,11 +13,13 @@ import 'tippy.js/dist/tippy.css';
 
 import './sidebar.css';
 import { FormFriendRequest } from '../form-friend-request';
+import { FormFavorite } from '../form-favorite';
 
-const iconSideBarIconMap = [faComments, faCircleUser, faPhoneVolume, faUserPlus];
+const iconSideBarIconMap = [faComments, faCircleUser, faHeartCirclePlus, faUserPlus];
 export const Sidebar = ({ user, setIdUserGetInfo, setIsOpenDrawer }) => {
     const [isOpenModal, setIsOpenModal] = useState(false);
     const [isOpenRequestList, setIsOpenRequestList] = useState(false);
+    const [isOpenFavoriteFrom, setIsOpenFavoriteFrom] = useState(false);
 
     const methodSidebarMap = {
         comments: () => {
@@ -27,8 +29,8 @@ export const Sidebar = ({ user, setIdUserGetInfo, setIsOpenDrawer }) => {
             setIsOpenDrawer(true);
             setIdUserGetInfo(user.id);
         },
-        'phone-volume': () => {
-            setIsOpenModal(true);
+        'heart-circle-plus': () => {
+            setIsOpenFavoriteFrom(true);
         },
         'user-plus': () => {
             setIsOpenModal(true);
@@ -38,7 +40,7 @@ export const Sidebar = ({ user, setIdUserGetInfo, setIsOpenDrawer }) => {
     const nameTooltipMap = {
         comments: 'Friend request',
         'circle-user': 'Your information',
-        'phone-volume': 'Call history',
+        'heart-circle-plus': 'Favorites',
         'user-plus': 'Add new friend',
     };
 
@@ -67,6 +69,18 @@ export const Sidebar = ({ user, setIdUserGetInfo, setIsOpenDrawer }) => {
                     }
                     type="add-friend"
                     title="Add friend"
+                />
+                <Modal
+                    isOpenModalRequest={isOpenFavoriteFrom}
+                    setIsOpenModalRequest={setIsOpenFavoriteFrom}
+                    content={
+                        <FormFavorite
+                            user={user}
+                            isOpen={isOpenFavoriteFrom}
+                            setIsOpenFavoriteFrom={setIsOpenFavoriteFrom}
+                        />
+                    }
+                    title="Favorite"
                 />
 
                 <Link to="/" className="sidebar-logo">

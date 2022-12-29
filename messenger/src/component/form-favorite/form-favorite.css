@@ -1,0 +1,17 @@
+.form-favorite-container {
+    display: flex;
+    gap: calc(2 * vaR(--spacing-lg));
+    flex-direction: column;
+}
+
+.form-favorite {
+    display: flex;
+    gap: vaR(--spacing-sm);
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-height: 400px;
+    overflow: auto;
+    font-size: var(--font-sm);
+}
+
