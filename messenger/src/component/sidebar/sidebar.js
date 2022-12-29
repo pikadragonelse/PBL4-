@@ -62,7 +62,6 @@ export const Sidebar = ({ user, setIdUserGetInfo, setIsOpenDrawer }) => {
                         <FormFriendRequest isOpen={isOpenRequestList} setIsOpenDrawer={setIsOpenDrawer} user={user} />
                     }
                     title="Friend request"
-                    type="add-friend"
                 />
                 <Modal
                     isOpenModalRequest={isOpenModal}

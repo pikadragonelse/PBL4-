@@ -42,7 +42,7 @@
 .list-friend-item-name {
     font-weight: 600;
     font-size: var(--font-sm);
-    max-width: 150px;
+    max-width: 130px;
 }
 
 .list-friend-item-container-text {

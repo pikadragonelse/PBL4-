@@ -21,6 +21,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
     const [userInfo, setUserInfo] = useState({});
     const [userInfoMap, setUserInfoMap] = useState({});
     const [listFriend, setListFriend] = useState([]);
+    const [listFriendUser, setListFriendUser] = useState([]);
     const [isReloadListFriend, setIsReloadListFriend] = useState(false);
 
     const filterFavorite = (listFavoritesMap) => {
@@ -44,6 +45,23 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
             .then((response) => response.json())
             .then((data) => {
                 setListFriend(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const getAllUserFriend = () => {
+        fetch(`http://localhost:8080/api/friend/get-all-friend?idUser=${user.id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${user.type} ${user.token}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setListFriendUser(data);
             })
             .catch((error) => {
                 console.log(error);
@@ -76,11 +94,32 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
             });
     };
 
+    const checkIsFriend = () => {
+        if (listFriendUser != null) {
+            return listFriendUser.some((item) => item.idFriend === idUserGetInfo);
+        }
+    };
+
+    const deleteFriend = () => {
+        fetch(`http://localhost:8080/api/friend/delete-friend?idFriend=${idUserGetInfo}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${user.type} ${user.token}`,
+            },
+        })
+            .then(() => {})
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     useEffect(() => {
         if (idUserGetInfo != null) {
             setListFriend([]);
             getInfoUser();
             getAllFriend();
+            getAllUserFriend();
         }
     }, [idUserGetInfo, isReloadListFriend]);
 
@@ -95,8 +134,12 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
                     <p className="form-user-info-hometown">{userInfo.homeTownUser}</p>
                 </div>
                 {idUserGetInfo !== user.id ? (
-                    <Button className="form-user-info-button" primary>
-                        Add friend
+                    <Button
+                        className="form-user-info-button"
+                        primary
+                        typeDecor={checkIsFriend() === true ? 'cancel' : ''}
+                    >
+                        {checkIsFriend() === true ? 'Cancel' : 'Add friend'}
                     </Button>
                 ) : (
                     ''
@@ -111,6 +154,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
                         type="showAllFriend"
                         className="form-user-info-list-friend"
                         listFriendUserInfo={listFriend}
+                        listFriendUser={listFriendUser}
                         setIsOpenDrawer={setIsOpenDrawer}
                         setIdUserGetInfo={setIdUserGetInfo}
                         setIsReloadListFriend={setIsReloadListFriend}

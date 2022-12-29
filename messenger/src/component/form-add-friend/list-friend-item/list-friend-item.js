@@ -26,6 +26,7 @@ export const ListFriendItem = ({
     listFriend,
     mutualFriends,
     setIsReloadListFriend,
+    listFriendUser,
 }) => {
     const [listRequest, setListRequest] = useState([]);
     const [resetState, setResetState] = useState(false);
@@ -56,8 +57,8 @@ export const ListFriendItem = ({
     };
 
     const checkIsFriend = () => {
-        if (listFriend != null) {
-            return listFriend.some((item) => item.idFriend === friend.idFriend);
+        if (listFriendUser != null) {
+            return listFriendUser.some((item) => item.idFriend === friend.idFriend);
         }
     };
 
@@ -134,69 +135,75 @@ export const ListFriendItem = ({
                 </div>
             </div>
             <div className="list-friend-item-button">
-                {type === 'addFriendToGroup' ? (
-                    <Button
-                        primary
-                        typeDecor={
-                            listAddToGroup.some((item) => item.friendId === friend.idFriend) === true ? 'cancel' : ''
-                        }
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            listAddToGroup.some((item) => item.friendId === friend.idFriend) === true
-                                ? handlePopFriendFromList(friend.idFriend)
-                                : handlePushFriendToList({ friendId: friend.idFriend, friendName: friend.name });
-                        }}
-                        size="small"
-                    >
-                        {listAddToGroup.some((item) => item.friendId === friend.idFriend) === false
-                            ? typeButtonMap[type]
-                            : 'Cancel'}
-                    </Button>
-                ) : type === 'addFriend' || type === 'showAllFriend' ? (
-                    <Button
-                        primary
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            if (listRequest[0] != null) {
-                                sendRequestAddFriend(checkIsRequest());
-                            } else {
-                                sendRequestAddFriend(false);
-                            }
-                            if (checkIsFriend() === true) {
-                                deleteFriend(friend.idFriend);
-                            }
-                        }}
-                        typeDecor={checkIsRequest() === true || checkIsFriend() === true ? 'cancel' : ''}
-                        size="small"
-                    >
-                        {checkIsRequest() === true || checkIsFriend() === true ? 'Cancel' : 'Add friend'}
-                    </Button>
-                ) : (
-                    <div className="container-button-request">
+                {friend.idFriend !== user.id ? (
+                    type === 'addFriendToGroup' ? (
                         <Button
+                            primary
+                            typeDecor={
+                                listAddToGroup.some((item) => item.friendId === friend.idFriend) === true
+                                    ? 'cancel'
+                                    : ''
+                            }
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                listAddToGroup.some((item) => item.friendId === friend.idFriend) === true
+                                    ? handlePopFriendFromList(friend.idFriend)
+                                    : handlePushFriendToList({ friendId: friend.idFriend, friendName: friend.name });
+                            }}
                             size="small"
+                        >
+                            {listAddToGroup.some((item) => item.friendId === friend.idFriend) === false
+                                ? typeButtonMap[type]
+                                : 'Cancel'}
+                        </Button>
+                    ) : type === 'addFriend' || type === 'showAllFriend' ? (
+                        <Button
                             primary
                             onClick={(e) => {
                                 e.stopPropagation();
-                                setIsAccept((prev) => (prev = !prev));
-                                acceptFriend(true);
+                                if (listRequest[0] != null) {
+                                    sendRequestAddFriend(checkIsRequest());
+                                } else {
+                                    sendRequestAddFriend(false);
+                                }
+                                if (checkIsFriend() === true) {
+                                    deleteFriend(friend.idFriend);
+                                }
                             }}
-                        >
-                            Accept
-                        </Button>
-                        <Button
+                            typeDecor={checkIsRequest() === true || checkIsFriend() === true ? 'cancel' : ''}
                             size="small"
-                            typeDecor="cancel"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setIsAccept((prev) => (prev = !prev));
-                                acceptFriend(false);
-                            }}
-                            className="deny-button"
                         >
-                            Deny
+                            {checkIsRequest() === true || checkIsFriend() === true ? 'Cancel' : 'Add friend'}
                         </Button>
-                    </div>
+                    ) : (
+                        <div className="container-button-request">
+                            <Button
+                                size="small"
+                                primary
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsAccept((prev) => (prev = !prev));
+                                    acceptFriend(true);
+                                }}
+                            >
+                                Accept
+                            </Button>
+                            <Button
+                                size="small"
+                                typeDecor="cancel"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsAccept((prev) => (prev = !prev));
+                                    acceptFriend(false);
+                                }}
+                                className="deny-button"
+                            >
+                                Deny
+                            </Button>
+                        </div>
+                    )
+                ) : (
+                    ''
                 )}
             </div>
         </li>
