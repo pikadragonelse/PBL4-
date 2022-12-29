@@ -78,3 +78,15 @@
 .form-close-icon:hover {
     background-color: var(--sub-color);
 }
+
+.form-add-friend-search-container {
+    display: flex;
+    gap: var(--spacing-sm);
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-add-friend-search {
+    flex: 1;
+}

@@ -24,6 +24,7 @@ export const ListFriendItem = ({
     user,
     setIsAccept,
     listFriend,
+    mutualFriends,
 }) => {
     const [listRequest, setListRequest] = useState([]);
     const [resetState, setResetState] = useState(false);
@@ -71,7 +72,6 @@ export const ListFriendItem = ({
             },
         )
             .then(() => {
-                console.log(isRequest);
                 setResetState((prev) => (prev = !prev));
             })
             .catch((error) => {
@@ -93,11 +93,25 @@ export const ListFriendItem = ({
             });
     };
 
+    const deleteFriend = (idFriend) => {
+        fetch(`http://localhost:8080/api/friend/delete-friend?idFriend=${idFriend}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${user.type} ${user.token}`,
+            },
+        })
+            .then(() => setResetState((prev) => (prev = !prev)))
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <li
             onClick={() => {
                 setIsOpenDrawer(true);
-                setIdUserGetInfo(friend.idFriend);
+                setIdUserGetInfo(friend.idFriend || friend.idUser);
                 try {
                     setIsOpenModal(false);
                 } catch (error) {}
@@ -108,7 +122,12 @@ export const ListFriendItem = ({
                 <div className="list-friend-item-container-avt">
                     <Avatar src={avatar} />
                 </div>
-                <h2 className="list-friend-item-name">{nameUser}</h2>
+                <div className="list-friend-item-container-text">
+                    <h2 className="list-friend-item-name">{nameUser}</h2>
+                    <p className="list-friend-item-text">
+                        {mutualFriends !== 0 ? `Mutual friends: ${mutualFriends}` : ''}
+                    </p>
+                </div>
             </div>
             <div className="list-friend-item-button">
                 {type === 'addFriendToGroup' ? (
@@ -138,6 +157,9 @@ export const ListFriendItem = ({
                                 sendRequestAddFriend(checkIsRequest());
                             } else {
                                 sendRequestAddFriend(false);
+                            }
+                            if (checkIsFriend() === true) {
+                                deleteFriend(friend.idFriend);
                             }
                         }}
                         typeDecor={checkIsRequest() === true || checkIsFriend() === true ? 'cancel' : ''}

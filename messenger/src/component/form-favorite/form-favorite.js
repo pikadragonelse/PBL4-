@@ -63,7 +63,6 @@ export const FormFavorite = ({ user, isOpen, setIsOpenFavoriteFrom }) => {
             .then((res) => res.json())
             .then((data) => {
                 setListFavoriteUser(filterFavorite(data));
-                console.log(filterFavorite(data));
             })
             .catch((error) => console.log(error));
     };
@@ -77,7 +76,6 @@ export const FormFavorite = ({ user, isOpen, setIsOpenFavoriteFrom }) => {
         });
 
         checkIsSelect().forEach((item) => (listToSendServer[item] = '2.5f'));
-        console.log(JSON.stringify(listToSendServer));
 
         fetch(`http://localhost:8080/api/user/add-user-favorite`, {
             method: 'POST',
@@ -112,6 +110,7 @@ export const FormFavorite = ({ user, isOpen, setIsOpenFavoriteFrom }) => {
             <div className="form-favorite">
                 {map.map((item) => (
                     <Tag
+                        key={item}
                         addToListFavoriteUser={addToListFavoriteUser}
                         type={checkMyFavorite(item) === false ? `choiceFavoriteTag` : ''}
                         removeFromListFavorite={removeFromListFavorite}

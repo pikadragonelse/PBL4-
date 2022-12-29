@@ -16,7 +16,7 @@
 }
 
 .list-friend-item-container-avt {
-    --size-avt: 50px;
+    --size-avt: 65px;
     width: var(--size-avt);
     height: var(--size-avt);
 
@@ -37,6 +37,23 @@
 
 .deny-button {
     color: var(--main-color);
+}
+
+.list-friend-item-name {
+    font-weight: 600;
+    font-size: var(--font-sm);
+    max-width: 150px;
+}
+
+.list-friend-item-container-text {
+    display: flex;
+    flex-direction: column;
+    gap: vaR(--spacing-vr-sm);
+    justify-content: center;
+}
+
+.list-friend-item-text {
+    font-size: var(--font-vr-sm);
 }
 
 
