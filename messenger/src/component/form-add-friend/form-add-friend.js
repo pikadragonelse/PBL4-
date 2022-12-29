@@ -28,6 +28,10 @@ export const FormAddFriend = ({
     setIsOpenDrawer,
     setIdUserGetInfo,
     listFriendUserInfo,
+    setIsReloadListFriend,
+    isSearch,
+    setIsSearch,
+    searchTxt,
 }) => {
     const [listFriend, setListFriend] = useState([]);
     const [listFriendRecommend, setListFriendRecommend] = useState([]);
@@ -41,6 +45,30 @@ export const FormAddFriend = ({
         addFriendToGroup: listFriend,
         addFriend: listFriendRecommend,
         showAllFriend: listFriendUserInfo,
+    };
+
+    useEffect(() => {
+        if (isSearch === true) {
+            searchUserRecommend();
+            setIsSearch(false);
+        }
+    }, [isSearch]);
+
+    const searchUserRecommend = () => {
+        fetch(`http://localhost:8080/api/friend/search-recommend-friend?search=${searchTxt}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `${user.type} ${user.token}`,
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setListFriendRecommend(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     const getAllFriend = () => {
@@ -169,6 +197,7 @@ export const FormAddFriend = ({
                               setIsOpenModal={setIsOpen}
                               listFriend={listFriendUserInfo}
                               mutualFriends={item.mutualFriends}
+                              setIsReloadListFriend={setIsReloadListFriend}
                           />
                       ))
                     : ''}

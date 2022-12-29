@@ -21,6 +21,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
     const [userInfo, setUserInfo] = useState({});
     const [userInfoMap, setUserInfoMap] = useState({});
     const [listFriend, setListFriend] = useState([]);
+    const [isReloadListFriend, setIsReloadListFriend] = useState(false);
 
     const filterFavorite = (listFavoritesMap) => {
         let listFavorites = [];
@@ -81,7 +82,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
             getInfoUser();
             getAllFriend();
         }
-    }, [idUserGetInfo]);
+    }, [idUserGetInfo, isReloadListFriend]);
 
     return (
         <div className={`form-user-info`}>
@@ -112,6 +113,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
                         listFriendUserInfo={listFriend}
                         setIsOpenDrawer={setIsOpenDrawer}
                         setIdUserGetInfo={setIdUserGetInfo}
+                        setIsReloadListFriend={setIsReloadListFriend}
                     />
                 </div>
                 <div className="form-user-info-personal">
