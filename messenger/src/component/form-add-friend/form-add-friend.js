@@ -163,7 +163,7 @@ export const FormAddFriend = ({
             />
             {type === 'addFriendToGroup' ? (
                 <div className="form-add-friend-list-friend-group">
-                    {listAddToGroup != null
+                    {listAddToGroup != null && listAddToGroup.length > 0
                         ? listAddToGroup.map((item) => (
                               <Tag
                                   key={item.friendId}

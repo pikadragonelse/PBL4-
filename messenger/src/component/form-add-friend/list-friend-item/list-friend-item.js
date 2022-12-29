@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar } from '../../avatar';
 import { Button } from '../../button';
+import { FormNoti } from '../../form-noti';
+import { Modal } from '../../modal';
 
 import './list-friend-item.css';
 
@@ -30,6 +32,7 @@ export const ListFriendItem = ({
 }) => {
     const [listRequest, setListRequest] = useState([]);
     const [resetState, setResetState] = useState(false);
+    const [isErrorToSendRequest, setIsErrorToSendRequest] = useState(false);
 
     const getAllMyFriendRequest = () => {
         fetch(`http://localhost:8080/api/friend/get-all-my-friend-request`, {
@@ -79,7 +82,7 @@ export const ListFriendItem = ({
                 setResetState((prev) => (prev = !prev));
             })
             .catch((error) => {
-                console.log(error);
+                setIsErrorToSendRequest(true);
             });
     };
 
@@ -125,6 +128,18 @@ export const ListFriendItem = ({
             }}
             className="list-friend-item"
         >
+            <Modal
+                content={
+                    <FormNoti
+                        content="Something is wrong, please try later!"
+                        setIsOpenModal={setIsErrorToSendRequest}
+                    />
+                }
+                setIsOpenModalRequest={setIsErrorToSendRequest}
+                isOpenModalRequest={isErrorToSendRequest}
+                title="Error"
+                type="notification"
+            />
             <div className="list-friend-info">
                 <div className="list-friend-item-container-avt">
                     <Avatar src={avatar} />
