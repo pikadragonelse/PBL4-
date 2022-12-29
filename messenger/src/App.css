@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500&display=swap');
 
 :root {
   --main-color: rgb(246, 246, 246);
@@ -8,12 +8,13 @@
   --sub-color: #e3e3e3;
   --sub-light-color: #eeecec;
   --contrast-color: #353535;
-  --contrast-light-color: #3b3b3b;
+  --contrast-light-color: #4e4e4e;
   --contrast-transparent-color: #3535359a;
   --sub-contrast-color: #f1f1f1;
   --primary-color: #6445E0;
   --primary-sub-color: #7350ff;
   --light-transparent-color: rgba(246, 246, 246, 0.46);
+  --error-color: rgb(255, 50, 50);
 
   /* spacing */
   --spacing-vr-sm: 5px;
@@ -54,7 +55,7 @@
 
 html {
   font-size: 62.5%;
-  font-family: "Rubik", "san-serif";
+  font-family: 'Noto Sans', sans-serif;
   margin: 0;
   padding: 0;
   color: var(--contrast-color);

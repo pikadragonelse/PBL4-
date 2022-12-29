@@ -2,6 +2,22 @@ import React from 'react';
 
 import './input.css';
 
-export const Input = ({ type, placeholder, name, id }) => {
-    return <input id={id} name={name} type={type} className={`input-app ${ type === 'file' || type === 'radio'? 'input-none-decor' : ''}`} placeholder={ type === 'file' || type === 'radio' ? '' : placeholder }/>;
+const specialClassList = {
+    file: 'input-none-decor',
+    radio: 'input-none-decor',
+};
+
+export const Input = ({ type, placeholder, name, id, value, onBlur, errorState, onClick }) => {
+    return (
+        <input
+            id={id}
+            name={name}
+            value={value}
+            type={type}
+            className={`input-app ${specialClassList[type]} ${errorState}`}
+            placeholder={type === 'file' || type === 'radio' ? '' : placeholder}
+            onBlur={onBlur}
+            onClick={onClick}
+        />
+    );
 };

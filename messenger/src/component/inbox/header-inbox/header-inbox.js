@@ -5,7 +5,8 @@ import React from 'react';
 
 import './header-inbox.css';
 
-const HeaderInbox = () => {
+const HeaderInbox = ({ useSubscribe }) => {
+    const { newestMessage } = useSubscribe('userInfoSub');
     return (
         <div className="header-inbox">
             <div className="header-inbox-info">
@@ -14,7 +15,7 @@ const HeaderInbox = () => {
                 </div>
 
                 <div className="header-inbox-main-info">
-                    <p className="header-inbox-name-friend">Long</p>
+                    <p className="header-inbox-name-friend">{newestMessage.username}</p>
                     <p className="header-inbox-state-friend">online</p>
                 </div>
             </div>

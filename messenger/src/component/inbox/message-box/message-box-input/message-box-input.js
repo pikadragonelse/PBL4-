@@ -19,6 +19,7 @@ export const MessageBoxInput = ({
     isSendMessage,
     setIsSendMessage,
     fileRef,
+    isDoneSend,
 }) => {
     const inputRef = useRef(null);
     const imgRef = useRef(null);
@@ -38,16 +39,9 @@ export const MessageBoxInput = ({
         }
     }, [isSendMessage]);
 
-    const checkTypeMessage = () => {
-        try {
-            const file = fileRef.current.files[0];
-            if (file != null) {
-                return specialTypeMessageMap[file.type.split('/')[0]];
-            } else {
-                return 0;
-            }
-        } catch (e) {}
-    };
+    useEffect(() => {
+        fileRef.current.value = null;
+    }, [isDoneSend]);
 
     const sendSpecialMessage = (file) => {
         let reader = new FileReader();
@@ -72,6 +66,17 @@ export const MessageBoxInput = ({
         } catch (error) {
             console.log(error);
         }
+    };
+
+    const checkTypeMessage = () => {
+        try {
+            const file = fileRef.current.files[0];
+            if (file != null) {
+                return specialTypeMessageMap[file.type.split('/')[0]];
+            } else {
+                return 0;
+            }
+        } catch (e) {}
     };
 
     const handleSelectMethodSendMessage = () => {

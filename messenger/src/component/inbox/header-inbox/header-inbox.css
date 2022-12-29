@@ -13,6 +13,16 @@
     gap: var(--spacing-sm);
 }
 
+.header-inbox-name-friend {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    max-width: 500px;
+}
+
+
+
 .header-inbox-wrapper-img {
     --size-img: 50px;
     width: var(--size-img);

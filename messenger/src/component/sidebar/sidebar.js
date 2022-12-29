@@ -1,5 +1,5 @@
 import { faComments, faCircleUser } from '@fortawesome/free-regular-svg-icons';
-import { faPhoneVolume, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHeartCirclePlus, faPhoneVolume, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Avatar } from '../avatar';
 import { Logo } from '../logo';
@@ -12,20 +12,25 @@ import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 
 import './sidebar.css';
+import { FormFriendRequest } from '../form-friend-request';
+import { FormFavorite } from '../form-favorite';
 
-const iconSideBarIconMap = [faComments, faCircleUser, faPhoneVolume, faUserPlus];
-export const Sidebar = () => {
+const iconSideBarIconMap = [faComments, faCircleUser, faHeartCirclePlus, faUserPlus];
+export const Sidebar = ({ user, setIdUserGetInfo, setIsOpenDrawer }) => {
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const [isOpenRequestList, setIsOpenRequestList] = useState(false);
+    const [isOpenFavoriteFrom, setIsOpenFavoriteFrom] = useState(false);
 
     const methodSidebarMap = {
         comments: () => {
-            setIsOpenModal(true);
+            setIsOpenRequestList(true);
         },
         'circle-user': () => {
-            setIsOpenModal(true);
+            setIsOpenDrawer(true);
+            setIdUserGetInfo(user.id);
         },
-        'phone-volume': () => {
-            setIsOpenModal(true);
+        'heart-circle-plus': () => {
+            setIsOpenFavoriteFrom(true);
         },
         'user-plus': () => {
             setIsOpenModal(true);
@@ -33,9 +38,9 @@ export const Sidebar = () => {
     };
 
     const nameTooltipMap = {
-        comments: 'Stranger message',
+        comments: 'Friend request',
         'circle-user': 'Your information',
-        'phone-volume': 'Call history',
+        'heart-circle-plus': 'Favorites',
         'user-plus': 'Add new friend',
     };
 
@@ -43,11 +48,41 @@ export const Sidebar = () => {
         <div className="sidebar-main">
             <div className="sidebar-nav">
                 <Modal
-                    isOpenModalRequest={isOpenModal}
-                    setIsOpenModalRequest={setIsOpenModal}
-                    content={<FormAddFriend />}
+                    isOpenModalRequest={isOpenRequestList}
+                    setIsOpenModalRequest={setIsOpenRequestList}
+                    content={<FormFriendRequest setIsOpenDrawer={setIsOpenDrawer} user={user} />}
+                    title="Friend request"
                     type="add-friend"
                 />
+                <Modal
+                    isOpenModalRequest={isOpenModal}
+                    setIsOpenModalRequest={setIsOpenModal}
+                    content={
+                        <FormAddFriend
+                            setIsOpenDrawer={setIsOpenDrawer}
+                            type="addFriend"
+                            isOpen={isOpenModal}
+                            setIsOpen={setIsOpenModal}
+                            user={user}
+                            setIdUserGetInfo={setIdUserGetInfo}
+                        />
+                    }
+                    type="add-friend"
+                    title="Add friend"
+                />
+                <Modal
+                    isOpenModalRequest={isOpenFavoriteFrom}
+                    setIsOpenModalRequest={setIsOpenFavoriteFrom}
+                    content={
+                        <FormFavorite
+                            user={user}
+                            isOpen={isOpenFavoriteFrom}
+                            setIsOpenFavoriteFrom={setIsOpenFavoriteFrom}
+                        />
+                    }
+                    title="Favorite"
+                />
+
                 <Link to="/" className="sidebar-logo">
                     <Logo type="logo-sidebar" />
                 </Link>
@@ -55,7 +90,7 @@ export const Sidebar = () => {
                     <Tippy
                         key={item.iconName}
                         content={nameTooltipMap[item.iconName]}
-                        interactive={true}   
+                        interactive={true}
                         placement="right"
                         duration={20}
                         className="sidebar-tippy"

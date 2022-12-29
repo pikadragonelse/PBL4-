@@ -1,0 +1,55 @@
+.tag {
+    display: flex;
+    align-items: center;    
+    justify-content: space-between;
+    gap: var(--spacing-vr-sm);
+    background-color: var(--primary-sub-color);
+    color: var(--main-color);
+    border-radius: var(--b-radius-mch);
+    font-size: var(--font-vr-sm);
+    min-width: 50px;
+    max-width: 150px;
+    padding: var(--spacing-vr-sm) var(--spacing-sm);
+    position: relative;
+    line-height: 1;
+}
+
+.tag-content {
+    padding: 0;
+    margin: 0;
+}
+
+.tag-icon {
+    --size-icon: 10px;
+    position: relative;
+    right: 0;
+    width: var(--size-icon);
+    height: var(--size-icon);
+    padding: var(--spacing-vr-sm);
+    border-radius: var(--b-radius-mch);
+    background-color: var(--light-transparent-color);
+    transition: background-color 0.1s ease-out;
+    cursor: pointer;
+}
+
+.tag-icon:hover {
+    background-color: var(--main-color-transparent);
+}
+
+.favoriteTag {
+    background-color: var(--main-color);
+    color: var(--contrast-color);
+}
+
+.choiceFavoriteTag {
+    background-color: var(--main-color);
+    color: var(--contrast-color);
+    border:1px solid var(--sub-color);
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+}
+
+.choiceFavoriteTag:hover {
+    background-color: var(--sub-light-color);
+}
+
