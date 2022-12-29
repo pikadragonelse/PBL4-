@@ -168,6 +168,7 @@ export const FormAddFriend = ({
                               setIdUserGetInfo={setIdUserGetInfo}
                               setIsOpenModal={setIsOpen}
                               listFriend={listFriendUserInfo}
+                              mutualFriends={item.mutualFriends}
                           />
                       ))
                     : ''}

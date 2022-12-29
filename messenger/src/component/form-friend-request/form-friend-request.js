@@ -4,7 +4,7 @@ import { ListFriendItem } from '../form-add-friend/list-friend-item';
 
 import './form-friend-request.css';
 
-export const FormFriendRequest = ({ user, setIsOpenDrawer }) => {
+export const FormFriendRequest = ({ user, setIsOpenDrawer, isOpen }) => {
     const [listRequest, setListRequest] = useState([]);
     const [isAccept, setIsAccept] = useState(false);
     const getAllMyFriendRequest = () => {
@@ -26,7 +26,7 @@ export const FormFriendRequest = ({ user, setIsOpenDrawer }) => {
 
     useEffect(() => {
         getAllMyFriendRequest();
-    }, [isAccept]);
+    }, [isAccept, isOpen]);
 
     return (
         <div className="form-friend-request">

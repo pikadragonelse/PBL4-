@@ -10,7 +10,6 @@
 
 .list-message-container {
     position: relative;
-    border-radius: var(--b-radius-md);
     overflow: hidden;
     flex: 1;
     overflow: auto;
@@ -30,7 +29,7 @@
 .list-message-container::-webkit-scrollbar-thumb
 {
 	border-radius: 10px;
-	background-color: var(--primary-color);
+	background-color: var(--contrast-light-color);
     cursor: pointer;
 }
 

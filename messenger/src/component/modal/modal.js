@@ -5,19 +5,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Search } from '../search';
 
 import './modal.css';
+import { Button } from '../button';
+import { useState } from 'react';
 
-export const Modal = ({ content, type, isOpenModalRequest, setIsOpenModalRequest, title }) => {
-    const handleAddFriend = (e, form) => {
-        e.preventDefault();
-    };
+export const Modal = ({
+    content,
+    type,
+    isOpenModalRequest,
+    setIsOpenModalRequest,
+    title,
+    setSearchTxt,
+    setIsSearch,
+}) => {
+    const [inputRef, setInputRef] = useState(null);
 
     return ReactDOM.createPortal(
         <div className={`modal-wrapper ${isOpenModalRequest === true ? 'modal-open' : ''}`}>
             <div className="overlay-modal"></div>
             <form
                 onSubmit={(e) => {
-                    const target = e.target;
-                    handleAddFriend(e, target);
+                    e.preventDefault();
                 }}
                 className="form"
             >
@@ -25,7 +32,17 @@ export const Modal = ({ content, type, isOpenModalRequest, setIsOpenModalRequest
                     <h2 className="form-title">{title}</h2>
                     {type === 'add-friend' ? (
                         <div className="form-add-friend-search-container">
-                            <Search className="form-add-friend-search" />
+                            <Search setInputRef={setInputRef} className="form-add-friend-search" />
+                            <Button
+                                onClick={() => {
+                                    setSearchTxt(inputRef.value);
+                                    setIsSearch(true);
+                                }}
+                                primary
+                                size="small"
+                            >
+                                Search
+                            </Button>
                         </div>
                     ) : (
                         ''
