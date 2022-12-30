@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Button } from '../button';
 import { Input } from '../input';
 import './form-sign-in.css';
+import { api } from '../../api.js';
 
 const subInputSections = ['Email', 'Nickname'];
 const mainInputSections = ['Username', 'Password'];
@@ -39,7 +40,7 @@ export const FormSignIn = ({ isHidden, signInHandle, handleHideSignInForm, setEr
             return;
         }
 
-        fetch(`http://localhost:8080/api/user/check-valid-username?username=${username}`)
+        fetch(`${api}/api/user/check-valid-username?username=${username}`)
             .then((response) => (response.status !== 200 ? setErrorUsername('Username already used') : ''))
             .catch(() => {});
 
@@ -53,7 +54,7 @@ export const FormSignIn = ({ isHidden, signInHandle, handleHideSignInForm, setEr
             setErrorState(true);
             return;
         }
-        fetch(`http://localhost:8080/api/user/check-valid-email?email=${email}`)
+        fetch(`${api}/api/user/check-valid-email?email=${email}`)
             .then((response) => (response.status !== 200 ? setErrorEmail('Email already used') : ''))
             .catch(() => {});
 

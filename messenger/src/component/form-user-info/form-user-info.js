@@ -7,6 +7,7 @@ import { Tag } from '../tag';
 import { FormUserInfoBlock } from './form-user-info-block';
 
 import './form-user-info.css';
+import { api } from '../../api';
 
 const blockInfoMap = ['Introduce', 'Contact', 'Favorites'];
 const blockInfoIntroduceItemMap = ['Date of birth', 'Address', 'Gender'];
@@ -35,7 +36,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
     };
 
     const getAllFriend = () => {
-        fetch(`http://localhost:8080/api/friend/get-all-friend?idUser=${idUserGetInfo}`, {
+        fetch(`${api}/api/friend/get-all-friend?idUser=${idUserGetInfo}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
     };
 
     const getAllUserFriend = () => {
-        fetch(`http://localhost:8080/api/friend/get-all-friend?idUser=${user.id}`, {
+        fetch(`${api}/api/friend/get-all-friend?idUser=${user.id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,7 +70,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
     };
 
     const getInfoUser = () => {
-        fetch(`http://localhost:8080/api/user/get-info-user?idUser=${idUserGetInfo}`, {
+        fetch(`${api}/api/user/get-info-user?idUser=${idUserGetInfo}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -101,7 +102,7 @@ export const FormUserInfo = ({ user, idUserGetInfo, isOpen, setIsOpenDrawer, set
     };
 
     const deleteFriend = () => {
-        fetch(`http://localhost:8080/api/friend/delete-friend?idFriend=${idUserGetInfo}`, {
+        fetch(`${api}/api/friend/delete-friend?idFriend=${idUserGetInfo}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

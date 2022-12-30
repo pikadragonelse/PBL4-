@@ -6,6 +6,7 @@ import { FormLogin } from '../../form-login';
 import { FormSignIn } from '../../form-sign-in/form-sign-in';
 import { Modal } from '../../modal';
 import { FormNoti } from '../../form-noti';
+import { api } from '../../../api';
 
 export const LoginContent = () => {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ export const LoginContent = () => {
             password: form.elements.password.value,
         };
 
-        fetch('http://localhost:8080/authenticate', {
+        fetch(`${api}/authenticate`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,7 +64,7 @@ export const LoginContent = () => {
                 gender: gender,
             };
 
-            fetch('http://localhost:8080/api/user/create-new-user', {
+            fetch(`${api}/api/user/create-new-user`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

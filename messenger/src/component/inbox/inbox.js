@@ -5,6 +5,7 @@ import { HeaderInbox } from './header-inbox';
 
 import './inbox.css';
 import { MessageBox } from './message-box';
+import { api } from '../../api';
 
 export const Inbox = ({ user, useSubscribe }) => {
     const [listMessageOfGroup, setListMessageOfGroup] = useState([]);
@@ -18,7 +19,7 @@ export const Inbox = ({ user, useSubscribe }) => {
     const getAllMessages = () => {
         try {
             if (newestMessage.idGroup !== 0) {
-                fetch(`http://localhost:8080/api/message/get-message?idGroup=${newestMessage.idGroup}`, {
+                fetch(`${api}/api/message/get-message?idGroup=${newestMessage.idGroup}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -40,7 +41,7 @@ export const Inbox = ({ user, useSubscribe }) => {
     const sendMessage = (messageSended) => {
         try {
             if (newestMessage.idGroup !== 0) {
-                fetch(`http://localhost:8080/api/message/send-message?idGroup=${newestMessage.idGroup}`, {
+                fetch(`${api}/api/message/send-message?idGroup=${newestMessage.idGroup}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

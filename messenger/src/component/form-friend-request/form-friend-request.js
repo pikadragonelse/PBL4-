@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { ListFriendItem } from '../form-add-friend/list-friend-item';
 
 import './form-friend-request.css';
+import { api } from '../../api';
 
 export const FormFriendRequest = ({ user, setIsOpenDrawer, isOpen }) => {
     const [listRequest, setListRequest] = useState([]);
     const [isAccept, setIsAccept] = useState(false);
     const getAllMyFriendRequest = () => {
-        fetch(`http://localhost:8080/api/friend/get-all-friend-request`, {
+        fetch(`${api}/api/friend/get-all-friend-request`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

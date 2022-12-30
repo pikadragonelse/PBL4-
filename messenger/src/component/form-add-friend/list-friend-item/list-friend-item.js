@@ -5,6 +5,7 @@ import { FormNoti } from '../../form-noti';
 import { Modal } from '../../modal';
 
 import './list-friend-item.css';
+import { api } from '../../../api';
 
 const typeButtonMap = {
     addFriend: 'Add friend',
@@ -35,7 +36,7 @@ export const ListFriendItem = ({
     const [isErrorToSendRequest, setIsErrorToSendRequest] = useState(false);
 
     const getAllMyFriendRequest = () => {
-        fetch(`http://localhost:8080/api/friend/get-all-my-friend-request`, {
+        fetch(`${api}/api/friend/get-all-my-friend-request`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,9 +68,7 @@ export const ListFriendItem = ({
 
     const sendRequestAddFriend = (isRequest) => {
         fetch(
-            `http://localhost:8080/api/friend/send-friend-request?idFriend=${
-                friend.idFriend || friend.idUser
-            }&request=${!isRequest}`,
+            `${api}/api/friend/send-friend-request?idFriend=${friend.idFriend || friend.idUser}&request=${!isRequest}`,
             {
                 method: 'GET',
                 headers: {
@@ -87,7 +86,7 @@ export const ListFriendItem = ({
     };
 
     const acceptFriend = (isAccept) => {
-        fetch(`http://localhost:8080/api/friend/reply-friend-request?idFriend=${friend.idFriend}&reply=${isAccept}`, {
+        fetch(`${api}/api/friend/reply-friend-request?idFriend=${friend.idFriend}&reply=${isAccept}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -101,7 +100,7 @@ export const ListFriendItem = ({
     };
 
     const deleteFriend = (idFriend) => {
-        fetch(`http://localhost:8080/api/friend/delete-friend?idFriend=${idFriend}`, {
+        fetch(`${api}/api/friend/delete-friend?idFriend=${idFriend}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

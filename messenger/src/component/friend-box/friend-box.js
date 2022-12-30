@@ -8,6 +8,7 @@ import { Loading } from '../loading';
 import './friend-box.css';
 import { Modal } from '../modal';
 import { FormAddFriend } from '../form-add-friend';
+import { api } from '../../api';
 
 export const FriendBox = ({ user, sendToBroker, setIsOpenDrawer, setIdUserGetInfo }) => {
     const listMessageContainerRef = useRef();
@@ -18,7 +19,7 @@ export const FriendBox = ({ user, sendToBroker, setIsOpenDrawer, setIdUserGetInf
     const [isOpenModalAddFriendToGroup, setIsOpenModalAddFriendToGroup] = useState(false);
 
     const getAllGroup = () => {
-        fetch(`http://localhost:8080/api/group/get-all-group`, {
+        fetch(`${api}/api/group/get-all-group`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

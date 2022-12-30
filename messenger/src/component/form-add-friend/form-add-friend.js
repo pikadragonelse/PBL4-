@@ -8,6 +8,7 @@ import { ListFriendItem } from './list-friend-item';
 import { FormNoti } from '../form-noti';
 
 import './form-add-friend.css';
+import { api } from '../../api';
 
 const stateCreateGroupMap = {
     true: 'successful',
@@ -56,7 +57,7 @@ export const FormAddFriend = ({
     }, [isSearch]);
 
     const searchUserRecommend = () => {
-        fetch(`http://localhost:8080/api/friend/search-recommend-friend?search=${searchTxt}`, {
+        fetch(`${api}/api/friend/search-recommend-friend?search=${searchTxt}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -73,7 +74,7 @@ export const FormAddFriend = ({
     };
 
     const getAllFriend = () => {
-        fetch('http://localhost:8080/api/friend/get-all-friend', {
+        fetch(`${api}/api/friend/get-all-friend`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -90,7 +91,7 @@ export const FormAddFriend = ({
     };
 
     const getAllRecommendFriend = () => {
-        fetch('http://localhost:8080/api/friend/recommend-friend', {
+        fetch(`${api}/api/friend/recommend-friend`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -107,7 +108,7 @@ export const FormAddFriend = ({
     };
 
     const createGroupMessage = () => {
-        fetch('http://localhost:8080/api/group/create-group', {
+        fetch(`${api}/api/group/create-group`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

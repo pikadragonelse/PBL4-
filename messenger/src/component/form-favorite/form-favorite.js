@@ -5,6 +5,7 @@ import { Button } from '../button';
 import { Tag } from '../tag';
 
 import './form-favorite.css';
+import { api } from '../../api';
 
 export const FormFavorite = ({ user, isOpen, setIsOpenFavoriteFrom }) => {
     const [listFavoriteUser, setListFavoriteUser] = useState([]);
@@ -53,7 +54,7 @@ export const FormFavorite = ({ user, isOpen, setIsOpenFavoriteFrom }) => {
     };
 
     const getAllFavoriteOfUser = () => {
-        fetch(`http://localhost:8080/api/user/get-user-favorite`, {
+        fetch(`${api}/api/user/get-user-favorite`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ export const FormFavorite = ({ user, isOpen, setIsOpenFavoriteFrom }) => {
 
         checkIsSelect().forEach((item) => (listToSendServer[item] = '2.5f'));
 
-        fetch(`http://localhost:8080/api/user/add-user-favorite`, {
+        fetch(`${api}/api/user/add-user-favorite`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

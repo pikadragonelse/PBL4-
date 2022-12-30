@@ -6,7 +6,6 @@ export const useRecorder = () => {
     const [recorder, setRecorder] = useState(null);
 
     useEffect(() => {
-        // Lazily obtain recorder first time we're recording.
         if (recorder === null) {
             if (isRecording === true) {
                 requestRecorder().then(setRecorder, console.error);
@@ -14,13 +13,11 @@ export const useRecorder = () => {
             return;
         }
 
-        // Manage recorder state.
         if (isRecording === true) {
             recorder.start();
         } else {
             recorder.stop();
         }
-        // Obtain the audio when ready.
         const handleData = (e) => {
             setAudioURL(URL.createObjectURL(e.data));
         };

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ListFriendItem } from '../form-add-friend/list-friend-item';
 
 import './form-search-friend.css';
+import { api } from '../../api';
 
 export const FormSearchFriend = ({
     searchTxt,
@@ -17,7 +18,7 @@ export const FormSearchFriend = ({
     const [userResult, setUserResult] = useState({});
 
     const searchUser = () => {
-        fetch(`http://localhost:8080/api/user/search-user-by-email?search=${searchTxt}`, {
+        fetch(`${api}/api/user/search-user-by-email?search=${searchTxt}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
